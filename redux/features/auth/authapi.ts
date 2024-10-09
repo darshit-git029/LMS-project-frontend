@@ -1,6 +1,7 @@
+'use client'
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { apiSlice } from "../apiSlice";
-import { userLoggedIn, userregistration } from "./authSlice";
+import { userLoggedIn, userLoggout, userregistration } from "./authSlice";
 
 type RegistrationResponse = {
     message: string;
@@ -67,7 +68,48 @@ export const authApi = apiSlice.injectEndpoints({
               }
             },
           }), 
+          socialAuth: builder.mutation({
+            query: ({ email, name,avatar }) => ({
+              url: "socialauth",
+              method: "POST",
+              body: {
+                email,
+                name,
+                avatar
+                },
+              credentials: "include" as const,
+            }),
+            async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+              try {
+                const result = await queryFulfilled;
+                dispatch(
+                  userLoggedIn({
+                    accessToken: result.data.accessToken,
+                    user: result.data.user,
+                  })
+                );
+              } catch (error: any) {
+                console.log(error);
+              }
+            },
+          }), 
+          Logout: builder.query({
+            query: () => ({
+              url: "logout",
+              method: "GET",
+              credentials: "include" as const,
+            }),
+            async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+              try {
+                dispatch(
+                  userLoggout() 
+                );
+              } catch (error: any) {
+                console.log(error);
+              }
+            },
+          }),
     })
 })
 
-export const {useRegisterMutation,useActivationMutation,useLoginMutation} = authApi
+export const {useRegisterMutation,useActivationMutation,useLoginMutation,useSocialAuthMutation,useLogoutQuery} = authApi

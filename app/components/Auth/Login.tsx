@@ -1,5 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
-
 import React, { FC, useEffect, useState } from 'react'
 import { useFormik } from 'formik'
 import * as Yup from "yup"
@@ -8,6 +8,8 @@ import { FcGoogle } from 'react-icons/fc'
 import { style } from '../../style'
 import { useLoginMutation } from '@/redux/features/auth/authapi'
 import toast from 'react-hot-toast'
+import { signIn } from 'next-auth/react'
+
 
 type Props = {
     setRoute: (Route: string) => void
@@ -19,14 +21,12 @@ const schema = Yup.object().shape({
     password: Yup.string().required("Please enter your password").min(6)
 })
 
-const signIn = () => {
 
-}
 
 const Login: FC<Props> = ({setRoute,setOpen}) => {
 
     const [show, setShow] = useState(false)
-    const [login,{isSuccess,data,error}] = useLoginMutation()
+    const [login,{isSuccess,error}] = useLoginMutation()
 
     const formik = useFormik({
         initialValues: { email: "", password: "" },
@@ -46,7 +46,7 @@ const Login: FC<Props> = ({setRoute,setOpen}) => {
                 toast.error(errordata.data.message)
             }
         }
-    },[isSuccess,error])
+    },[isSuccess,error,setOpen])
 
 
     const { errors, touched, values, handleChange, handleSubmit } = formik

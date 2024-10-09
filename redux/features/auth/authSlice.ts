@@ -1,5 +1,5 @@
-import { CreateApi, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { GiAnnexation } from "react-icons/gi";
+'use client'
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState = {
     token:"",

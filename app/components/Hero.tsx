@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @typescript-eslint/no-require-imports */
+'use client'
 import Image from 'next/image'
 import Link from 'next/link'
 import React,{FC} from 'react'

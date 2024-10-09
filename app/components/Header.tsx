@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import Link from 'next/link'
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { FC, useState, useEffect } from 'react'
 import Navitem from '../utils/Navitem'
 import { ThemeSwitcher } from '../utils/ThemeSwitcher'
@@ -12,7 +11,12 @@ import Signup from './Auth/Signup'
 import Verification from './Auth/Verification'
 import { useSelector } from 'react-redux'
 import Image from 'next/image'
-import avatar from "../../../client/assect/client-1.jpg"
+import avatarDefault from "../../../client/assect/client-1.jpg"
+import { useSession } from 'next-auth/react'
+import { useLogoutQuery, useSocialAuthMutation } from '@/redux/features/auth/authapi'
+import toast from 'react-hot-toast'
+import { imageListItemClasses } from '@mui/material'
+
 type Props = {
     open: boolean;
     setOpen: (open: boolean) => void;
@@ -26,6 +30,38 @@ const Header: FC<Props> = ({ activeItem, setOpen, Route, open, setRoute }) => {
     const [active, setActive] = useState(false)
     const [opensidebar, setOpensidebar] = useState(false)
     const { user } = useSelector((state: any) => state.auth)
+    const [socialAuth, { isSuccess, error }] = useSocialAuthMutation()
+    const { data } = useSession()
+    const [logout, setLogout] = useState(false)
+
+    const { } = useLogoutQuery(undefined, {
+        skip: !logout ? true : false
+    })
+    useEffect(() => {
+        if (!user) {
+            if (data) {
+                socialAuth({ email: data?.user?.email, name: data?.user?.name, avatar: data?.user?.image })
+            }
+        }
+        else if (data === null)
+            if (isSuccess) {
+                toast.success("Login Successfully")
+            } else if (error) {
+                toast.error("Login failed")
+            }
+
+        if (data === null) {
+            setLogout(true)
+        }
+
+    }, [data, user, socialAuth, isSuccess, error])
+
+
+    console.log(data);
+
+
+
+
     useEffect(() => {
         const handleScroll = () => {
             if (window.scrollY > 80) {
@@ -96,21 +132,26 @@ const Header: FC<Props> = ({ activeItem, setOpen, Route, open, setRoute }) => {
                             </div>
                             {
                                 user ? (
-                                    <a href={"/profile"}>
-                                    <Image
-                                    src={user.avatar ? user.avatar : avatar}
-                                    alt=''
-                                    className='rounded-full w-[30px] h-[30px] cursor-pointer'
+                                    <Link href={"/profile"}>
+                                        <Image
+                                            src={user?.avatar ? data?.user?.image || user?.avatar.url : avatarDefault}
+                                            width={120}
+                                            height={120}
+                                            alt=''
+                                            className='rounded-full w-[30px] h-[30px] cursor-pointer'
+                                            style={{border: activeItem === 5 ? "2px solid #ffc107" : "none"}}
+
+                                        />
+                                    </Link>
+                                ) : (
+                                    <HiOutlineUserCircle
+                                        className='hidden 800px:block cursor-pointer dark:text-white text-black'
+                                        size={25}
+                                        onClick={() => setOpen(true)}
+                                        
                                     />
-                                    </a>
-                                ): (
-                                        <HiOutlineUserCircle
-                                        className = 'hidden 800px:block cursor-pointer dark:text-white text-black'
-                                        size = { 25 }
-                                        onClick = { () => setOpen(true) }
-                        />
-                            )
-                           }
+                                )
+                            }
                         </div>
                     </div>
                 </div>
