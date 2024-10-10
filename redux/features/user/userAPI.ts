@@ -23,10 +23,10 @@ export const userapi = apiSlice.injectEndpoints({
             }),
         }),
         updatePassword: builder.mutation({
-            query: ({oldpassword,newpassword}) => ({
+            query: ({oldPassword,newPassword}) => ({
                 url: "update/password",
                 method: "PUT",
-                body: {oldpassword,newpassword},
+                body: {oldPassword,newPassword},
                 credentials: "include" as const,
             }),
         })

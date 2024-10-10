@@ -9,6 +9,8 @@ import { RiLockPasswordLine } from 'react-icons/ri'
 import { AiOutlineLogout } from 'react-icons/ai'
 import { SiCoursera } from 'react-icons/si'
 import { useSession } from 'next-auth/react'
+import { MdOutlineAdminPanelSettings } from 'react-icons/md'
+import Link from 'next/link'
 
 type Props = {
     user: any,
@@ -21,18 +23,18 @@ type Props = {
 const SidebarProfile: FC<Props> = ({ user, active, avatar, logoutHandler, setActive }) => {
     const { data } = useSession()
     console.log("profile data", data);
-    const [loaduser , setLoaduser] = useState(false)
+    const [loaduser, setLoaduser] = useState(false)
 
     useEffect(() => {
         setLoaduser(true)
-    },[setLoaduser])
+    }, [setLoaduser])
 
     return (
         <div className='w-full'>
             <div className={`w-full flex items-center px-3 py-4 cursor-pointer  ${active === 1 ? "dark:bg-slate-800 bg-white" : "bg-transparent"}`} onClick={() => setActive(1)}>
                 <Image
-                        src={user?.avatar ? data?.user?.image || user?.avatar.url : avatarDefault}
-                        width={120}
+                    src={user?.avatar ? data?.user?.image || user?.avatar.url : avatarDefault}
+                    width={120}
                     height={120}
                     alt="Avatar"
                     className='w-[40px] h-[40px] 800px:w-[20px] 800px:h-[20px] cursor-pointer rounded-full'
@@ -50,6 +52,15 @@ const SidebarProfile: FC<Props> = ({ user, active, avatar, logoutHandler, setAct
                 <SiCoursera size={20} fill="#fff" />
                 <h2 className='pl-2 800px:block hidden font-Poppins text-black dark:text-white'> Enrolled Course</h2>
             </div>
+            {
+                user?.role === "admin" && (
+                    <Link  href={'/admin'} className={`w-full flex items-center px-3 py-4 cursor-pointer  ${active === 5 ? "dark:bg-slate-800 bg-white" : "bg-transparent"}`} onClick={() => setActive(5)}>
+                        <MdOutlineAdminPanelSettings size={20} fill="#fff"/>
+                        <h2 className='pl-2 800px:block hidden font-Poppins text-black dark:text-white'> Admin Dashboard</h2>
+                    </Link>
+                )
+            }
+
             <div className={`w-full flex items-center px-3 py-4 cursor-pointer  ${active === 4 ? "dark:bg-slate-800 bg-white" : "bg-transparent"}`} onClick={() => logoutHandler()}>
                 <AiOutlineLogout size={20} fill="#fff" />
                 <h2 className='pl-2 800px:block hidden font-Poppins text-black dark:text-white'>Logout</h2>
