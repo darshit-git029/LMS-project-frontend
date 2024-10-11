@@ -147,7 +147,7 @@ const CourseInformation: FC<Props> = ({ courseinfo, setCourseInfo, active, setAc
                             setCourseInfo({ ...courseinfo, tags: e.target.value })
                         }
                         id='tags'
-                        placeholder="enter your course tags here"
+                        placeholder="type your course tags here"
                         className={`${style.input}`}
                     >
                     </input>
@@ -200,14 +200,14 @@ const CourseInformation: FC<Props> = ({ courseinfo, setCourseInfo, active, setAc
                     id='file'
                 ></input>
                 <label htmlFor="file"
-                    className={`wi-full min-h-[10vh] border dark:border-white border-[#00000026] p-3 flex items-center justify-center cursor-pointer ${drageing ? "bg-blue-500" : "bg-transparent"}`}
+                    className={`w-full min-h-[10vh] border dark:border-white border-[#00000026] p-3 flex items-center justify-center cursor-pointer ${drageing ? "bg-blue-500" : "bg-transparent"}`}
                     onDragOver={draggingOver}
                     onDragLeave={draggingLeave}
                     onDrop={handelDrop}
                 >
                     {
                         courseinfo.thubnail ? (
-                            <img src={courseinfo.thubnail} alt="" className='max-h-full w-full object-cover' />
+                            <img src={courseinfo.thubnail} alt="" className='max-h-[50vh] w-full object-cover' />
                         ) : (
                             <span className='text-black dark:text-white'>
                                 Drag and drop your thubnail here or click to browse
@@ -224,6 +224,8 @@ const CourseInformation: FC<Props> = ({ courseinfo, setCourseInfo, active, setAc
                         
                         />
                 </div>
+                <br />
+                <br />
             </form>
         </div>
     )

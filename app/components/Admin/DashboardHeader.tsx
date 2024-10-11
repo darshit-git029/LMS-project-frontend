@@ -30,7 +30,7 @@ function DashboardHeader({ notifications }: Props) {
                 </span>
             </div>
             {open && (
-                <div className="w-[350px] h-[60vh] overflow-y-scroll py-3 px-2 border border-[#ffffff0c] dark:bg-[#111C43] bg-white shadow-xl absolute top-16 z-[1000000000] rounded">
+                <div className="w-[350px] h-[60vh] overflow-y-scroll py-3 px-2 border border-[#ffffff0c] dark:bg-[#111C43] bg-white shadow-xl absolute top-16 z-[9999999999999999999999999999999999] rounded">
                     <h5 className="text-center text-[20px] font-Poppins text-black dark:text-white p-3">
                         Notifications
                     </h5>

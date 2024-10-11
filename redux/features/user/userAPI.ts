@@ -29,8 +29,15 @@ export const userapi = apiSlice.injectEndpoints({
                 body: {oldPassword,newPassword},
                 credentials: "include" as const,
             }),
+        }),
+        getAllUser : builder.query({
+            query: () => ({
+                url: "get/user-admin",
+                method: "GET",
+                credentials: "include" as const,
+            })
         })
     })
 })
 
-export const {useUpdateAvatarMutation,useEditProfileMutation,useUpdatePasswordMutation} = userapi
+export const {useUpdateAvatarMutation,useEditProfileMutation,useUpdatePasswordMutation,useGetAllUserQuery} = userapi

@@ -1,72 +1,82 @@
+"use client"
 import { style } from "../../../style";
 import React, { FC } from "react";
-import {AiOutlineLeftSquare, AiOutlinePlusCircle} from "react-icons/ai";
+import { AiOutlinePlusCircle } from "react-icons/ai";
 import { toast } from "react-hot-toast";
-import { MdTurnLeft, MdTurnRight } from "react-icons/md";
 
 type Props = {
-  benefit: { title: string }[];
+  benefits: { title: string }[];
   setBenefits: (benefits: { title: string }[]) => void;
-  prerequisites: { title: string }[];
-  setPrerequisites: (prerequisites: { title: string }[]) => void;
+  perrequistites: { title: string }[];
+  setperrequistites: (perrequistites: { title: string }[]) => void;
   active: number;
   setActive: (active: number) => void;
 };
 
 const CourseData: FC<Props> = ({
-  benefit,
+  benefits,
   setBenefits,
-  prerequisites,
-  setPrerequisites,
+  perrequistites,
+  setperrequistites,
   active,
   setActive,
 }) => {
 
-  const handleBenefitChange = (index: number, value: any) => {
-    const updatedBenefits = [...benefit];
-    updatedBenefits[index].title = value;
+  const handleBenefitChange = (index: number, value: string) => {
+    const updatedBenefits = benefits.map((benefit, idx) =>
+      idx === index ? { title: value } : benefit
+    );
     setBenefits(updatedBenefits);
   };
 
   const handleAddBenefit = () => {
-    setBenefits([...benefit, { title: "" }]);
+    // Add only if the last benefit title is not empty
+    if (benefits[benefits.length - 1]?.title !== "") {
+      setBenefits([...benefits, { title: "" }]);
+    } else {
+      toast.error("Please fill the current benefit before adding another");
+    }
   };
 
-  const handlePrerequisitesChange = (index: number, value: any) => {
-    const updatedPrerequisites = [...prerequisites];
-    updatedPrerequisites[index].title = value;
-    setPrerequisites(updatedPrerequisites);
+  const handleperrequistitesChange = (index: number, value: string) => {
+    const updatedperrequistites = perrequistites.map((perrequistites, idx) =>
+      idx === index ? { title: value } : perrequistites
+    );
+    setperrequistites(updatedperrequistites);
   };
 
-  const handleAddPrerequisites = () => {
-    setPrerequisites([...prerequisites, { title: "" }]);
+  const handleAddperrequistites = () => {
+    if (perrequistites[perrequistites.length - 1]?.title !== "") {
+      setperrequistites([...perrequistites, { title: "" }]);
+    } else {
+      toast.error("Please fill the current perrequistites before adding another");
+    }
   };
 
   const prevButton = () => {
     setActive(active - 1);
-  }
+  };
 
   const handleOptions = () => {
-    if (benefit[benefit.length - 1]?.title !== "" && prerequisites[prerequisites.length - 1]?.title !== "") {
+    if (benefits[benefits.length - 1]?.title !== "" && perrequistites[perrequistites.length - 1]?.title !== "") {
       setActive(active + 1);
-    } else{
-        toast.error("Please fill the fields for go to next!")
+    } else {
+      toast.error("Please fill the fields to proceed to the next step!");
     }
   };
-  
 
   return (
     <div className="w-[80%] m-auto mt-24 block">
       <div>
-        <label className={`${style.label} text-[20px]`} htmlFor="email">
+        <label className={`${style.label} text-[20px]`} htmlFor="benefit">
           What are the benefits for students in this course?
         </label>
         <br />
-        {benefit.map((benefit: any, index: number) => (
+        {benefits.map((benefit, index) => (
           <input
             type="text"
             key={index}
-            name="Benefit"
+            name={`benefit-${index}`}
             placeholder="You will be able to build a full stack LMS Platform..."
             required
             className={`${style.input} my-2`}
@@ -81,33 +91,33 @@ const CourseData: FC<Props> = ({
       </div>
 
       <div>
-        <label className={`${style.label} text-[20px]`} htmlFor="email">
-        What are the prerequisites for starting this course?
+        <label className={`${style.label} text-[20px]`} htmlFor="perrequistites">
+          What are the perrequistites for starting this course?
         </label>
         <br />
-        {prerequisites.map((prerequisites: any, index: number) => (
+        {perrequistites.map((perrequistites, index) => (
           <input
             type="text"
             key={index}
-            name="prerequisites"
+            name={`perrequistites-${index}`}
             placeholder="You need basic knowledge of MERN stack"
             required
             className={`${style.input} my-2`}
-            value={prerequisites.title}
-            onChange={(e) => handlePrerequisitesChange(index, e.target.value)}
+            value={perrequistites.title}
+            onChange={(e) => handleperrequistitesChange(index, e.target.value)}
           />
         ))}
         <AiOutlinePlusCircle
           style={{ margin: "10px 0px", cursor: "pointer", width: "30px" }}
-
-          onClick={handleAddPrerequisites}
+          onClick={handleAddperrequistites}
         />
       </div>
+
       <div className="w-full flex items-center justify-between">
-      <div
+        <div
           className="w-full 800px:w-[180px] flex gap-3 items-center justify-center h-[40px] bg-[#37a39a] text-center text-[#fff] rounded mt-8 cursor-pointer"
           onClick={() => prevButton()}
-          >
+        >
           Prev
         </div>
         <div
@@ -115,7 +125,6 @@ const CourseData: FC<Props> = ({
           onClick={() => handleOptions()}
         >
           Next
-
         </div>
       </div>
     </div>

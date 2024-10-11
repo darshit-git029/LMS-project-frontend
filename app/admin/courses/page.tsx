@@ -1,33 +1,34 @@
 'use client'
 import React from 'react'
+import Heading from '../../utils/Heading'
 import Adminsidebar from "../../components/Admin/Sidebar/Adminsidebar"
-import Heading from '@/app/utils/Heading'
-import CreateCourse from "../../components/Admin/Courses/createCourse"
-import DashboardHeader from '@/app/components/Admin/DashboardHeader'
-
+import AdminProtectd from '@/hooks/adminProtected'
+import DashboardHero from '../../components/Admin/DashboardHero'
+import Allcourses from '@/app/components/Admin/Courses/Allcourses'
 
 type Props = {}
 
-const page = (props: Props) => {
-  return (
-    <div>
-         <Heading
+function page({ }: Props) {
+    return (
+        <div>
+            <AdminProtectd>
+                <Heading
                     title={`E-Learning - Admin`}
                     description="E-learing is a paltfrom for student to learn and get help form teachers"
                     keyWord="Programming,MERN,Database"
                 />
-                <div className="flex h-max-screen">
+                <div className="flex h-screen">
                     <div className="1500px:w-[16%] w-1/5">
                         <Adminsidebar />
                     </div>
                     <div className="w-[85%] ">
-                    <DashboardHeader notifications={[]}/>
-                    <CreateCourse/>
-                    
+                <DashboardHero/>
+                <Allcourses/>
                     </div>
-                </div>    
-    </div>
-  )
+                </div>
+            </AdminProtectd>
+        </div>
+    )
 }
 
 export default page
