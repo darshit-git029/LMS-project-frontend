@@ -6,13 +6,13 @@ import React, { FC, useState } from 'react'
 import { MdTurnRight } from 'react-icons/md'
 
 type Props = {
-    courseinfo: any
+    courseInfo: any
     setCourseInfo: (courseinfo: any) => void
     active: number
     setActive: (active: number) => void
 }
 
-const CourseInformation: FC<Props> = ({ courseinfo, setCourseInfo, active, setActive }) => {
+const CourseInformation: FC<Props> = ({ courseInfo, setCourseInfo, active, setActive }) => {
 
     const [drageing, setDraging] = useState(false)
     const handleSubmit = (e: any) => {
@@ -27,7 +27,7 @@ const CourseInformation: FC<Props> = ({ courseinfo, setCourseInfo, active, setAc
             reader.onload = (e: any) => {
                 e.prevenetDefault()
                 if (reader.readyState === 2) {
-                    setCourseInfo({ ...courseinfo, thubnail: reader.result })
+                    setCourseInfo({ ...courseInfo, thubnail: reader.result })
                 }
             }
             reader.readAsDataURL(file)
@@ -49,7 +49,7 @@ const CourseInformation: FC<Props> = ({ courseinfo, setCourseInfo, active, setAc
         if (file) {
             const reader = new FileReader()
             reader.onload = (e: any) => {
-                setCourseInfo({ ...courseinfo, thubnail: reader.result })
+                setCourseInfo({ ...courseInfo, thubnail: reader.result })
             }
             reader.readAsDataURL(file)
         }
@@ -67,9 +67,9 @@ const CourseInformation: FC<Props> = ({ courseinfo, setCourseInfo, active, setAc
                         type='text'
                         name=''
                         required
-                        value={courseinfo.name}
+                        value={courseInfo.name}
                         onChange={(e) =>
-                            setCourseInfo({ ...courseinfo, name: e.target.value })
+                            setCourseInfo({ ...courseInfo, name: e.target.value })
                         }
                         id='name'
                         placeholder='MERN stack LMS platfrom with next 14'
@@ -84,9 +84,9 @@ const CourseInformation: FC<Props> = ({ courseinfo, setCourseInfo, active, setAc
                     <textarea cols={20} rows={8}
                         name=''
                         required
-                        value={courseinfo.description}
+                        value={courseInfo.description}
                         onChange={(e) =>
-                            setCourseInfo({ ...courseinfo, description: e.target.value })
+                            setCourseInfo({ ...courseInfo, description: e.target.value })
                         }
                         id=''
                         placeholder='type your course description here'
@@ -104,9 +104,9 @@ const CourseInformation: FC<Props> = ({ courseinfo, setCourseInfo, active, setAc
                             type='number'
                             name=''
                             required
-                            value={courseinfo.price}
+                            value={courseInfo.price}
                             onChange={(e) =>
-                                setCourseInfo({ ...courseinfo, price: e.target.value })
+                                setCourseInfo({ ...courseInfo, price: e.target.value })
                             }
                             id='price'
                             placeholder="00"
@@ -122,9 +122,9 @@ const CourseInformation: FC<Props> = ({ courseinfo, setCourseInfo, active, setAc
                             type='number'
                             name=''
                             required
-                            value={courseinfo.estimatedPrice}
+                            value={courseInfo.estimatedPrice}
                             onChange={(e) =>
-                                setCourseInfo({ ...courseinfo, estimatedPrice: e.target.value })
+                                setCourseInfo({ ...courseInfo, estimatedPrice: e.target.value })
                             }
                             id='estimatedPrice'
                             placeholder="00"
@@ -142,9 +142,9 @@ const CourseInformation: FC<Props> = ({ courseinfo, setCourseInfo, active, setAc
                         type='text'
                         name=''
                         required
-                        value={courseinfo.tags}
+                        value={courseInfo.tags}
                         onChange={(e) =>
-                            setCourseInfo({ ...courseinfo, tags: e.target.value })
+                            setCourseInfo({ ...courseInfo, tags: e.target.value })
                         }
                         id='tags'
                         placeholder="type your course tags here"
@@ -162,9 +162,9 @@ const CourseInformation: FC<Props> = ({ courseinfo, setCourseInfo, active, setAc
                             type='text'
                             name=''
                             required
-                            value={courseinfo.level}
+                            value={courseInfo.level}
                             onChange={(e) =>
-                                setCourseInfo({ ...courseinfo, level: e.target.value })
+                                setCourseInfo({ ...courseInfo, level: e.target.value })
                             }
                             id='level'
                             placeholder="type your course level EX:Begginer,Intermediat,Experience"
@@ -180,9 +180,9 @@ const CourseInformation: FC<Props> = ({ courseinfo, setCourseInfo, active, setAc
                             type='text'
                             name=''
                             required
-                            value={courseinfo.demoUrl}
+                            value={courseInfo.demoUrl}
                             onChange={(e) =>
-                                setCourseInfo({ ...courseinfo, demoUrl: e.target.value })
+                                setCourseInfo({ ...courseInfo, demoUrl: e.target.value })
                             }
                             id='demoUrl'
                             placeholder="type your demo vedio url"
@@ -206,8 +206,8 @@ const CourseInformation: FC<Props> = ({ courseinfo, setCourseInfo, active, setAc
                     onDrop={handelDrop}
                 >
                     {
-                        courseinfo.thubnail ? (
-                            <img src={courseinfo.thubnail} alt="" className='max-h-[50vh] w-full object-cover' />
+                        courseInfo.thubnail ? (
+                            <img src={courseInfo.thubnail} alt="" className='max-h-[50vh] w-full object-cover' />
                         ) : (
                             <span className='text-black dark:text-white'>
                                 Drag and drop your thubnail here or click to browse
