@@ -9,8 +9,7 @@ type Props = {}
 const EditHero: FC<Props> = (props: Props) => {
   enum LayoutType {
     BANNER = 'banner',
-    FAQ = 'FAQ',
-    CATEGORY = 'Categories'
+
 }
 
   const [image, setImage] = useState(""); 
@@ -33,7 +32,7 @@ const EditHero: FC<Props> = (props: Props) => {
 
     if (isSuccess) {
       refetch()
-      toast.success("Hero updated successfully!");
+      toast.success("Hero updated successfully.");
     }
 
     if (error) {
