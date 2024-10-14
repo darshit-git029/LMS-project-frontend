@@ -34,14 +34,15 @@ const CreateCourse = (props: Props) => {
     const [courseInfo, setCourseInfo] = useState({
         name: "",
         description: "",
+        category:"",
         price: "",
         estimatedPrice: "",
         tags: "",
         level: "",
-        categories: "",
         demoUrl: "",
         thubnail: "",
     });
+    
     const [benefits, setBenefits] = useState([{ title: "" }]);
     const [perrequistites, setPrerequisites] = useState([{ title: "" }]);
     const [courseContentData, setCourseContentData] = useState([
@@ -64,7 +65,8 @@ const CreateCourse = (props: Props) => {
 
     const [courseData, setCourseData] = useState({});
 
-
+    console.log(courseData);
+    
     const handleSubmit = async () => {
         // Format benefits array
         const formattedBenefits = benefits.map((benefit) => ({
@@ -95,7 +97,7 @@ const CreateCourse = (props: Props) => {
         const data = {
             name: courseInfo.name,
             description: courseInfo.description,
-            categories: courseInfo.categories,
+            category: courseInfo.category,
             price: courseInfo.price,
             estimatedPrice: courseInfo.estimatedPrice,
             tags: courseInfo.tags,

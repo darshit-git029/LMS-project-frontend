@@ -1,3 +1,7 @@
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable @typescript-eslint/no-empty-object-type */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { style } from '@/app/style';
 import { useEditLayoutMutation, useGetHeroDataQuery } from '@/redux/Layout/layoutApi';
 import React, { FC, useEffect, useState } from 'react';
@@ -41,7 +45,7 @@ const EditHero: FC<Props> = (props: Props) => {
         toast.error(errorData?.data?.message);
       }
     }
-  }, [data, isSuccess, error]);
+  }, [data, isSuccess, error,refetch]);
 
   const handleUpdate = (e: any) => {
     e.preventDefault(); 

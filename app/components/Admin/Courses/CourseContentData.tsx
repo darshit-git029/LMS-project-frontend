@@ -43,7 +43,7 @@ const CourseContentData: FC<Props> = ({ courseContentData, setCourseContentData,
     }
 
     const newcontentHandler = (item: any) => {
-        if (item.title === "" || item.description === "" || item.vedioUrl === "" || item.links[0].title === "" || item.links[0].url === "") {
+        if (item.title === "" || item.description === "" || item.videoUrl === "" || item.links[0].title === "" || item.links[0].url === "") {
             toast.error("Please fill all the filed")
         } else {
             let newVedioSection = ""
@@ -55,7 +55,7 @@ const CourseContentData: FC<Props> = ({ courseContentData, setCourseContentData,
                 }
             }
             const newContent = {
-                vedioUrl: "",
+                videoUrl: "",
                 title: "",
                 description: "",
                 vedioSection: newVedioSection,
@@ -75,7 +75,7 @@ const CourseContentData: FC<Props> = ({ courseContentData, setCourseContentData,
         if (
             courseContentData[courseContentData.length - 1].title === "" ||
             courseContentData[courseContentData.length - 1].description === "" ||
-            courseContentData[courseContentData.length - 1].vedioUrl === "" ||
+            courseContentData[courseContentData.length - 1].videoUrl === "" ||
             courseContentData[courseContentData.length - 1].links[0].title === "" ||
             courseContentData[courseContentData.length - 1].links[0].url === ""
 
@@ -100,7 +100,7 @@ const CourseContentData: FC<Props> = ({ courseContentData, setCourseContentData,
         if (
             courseContentData[courseContentData.length - 1].title === "" ||
             courseContentData[courseContentData.length - 1].description === "" ||
-            courseContentData[courseContentData.length - 1].vedioUrl === "" ||
+            courseContentData[courseContentData.length - 1].videoUrl === "" ||
             courseContentData[courseContentData.length - 1].links[0].title === "" ||
             courseContentData[courseContentData.length - 1].links[0].url === ""
         ) {
@@ -200,10 +200,23 @@ const CourseContentData: FC<Props> = ({ courseContentData, setCourseContentData,
                                                         <input type='text'
                                                             className={style.input}
                                                             placeholder="Project url.."
-                                                            value={item.vedioUrl}
+                                                            value={item.videoUrl}
                                                             onChange={(e) => {
                                                                 const updateData = [...courseContentData]
-                                                                updateData[index].vedioUrl = e.target.value
+                                                                updateData[index].videoUrl = e.target.value
+                                                                setCourseContentData(updateData)
+                                                            }}
+                                                        />
+                                                    </div>
+                                                    <div className="my-3">
+                                                        <label htmlFor="" className={style.label}>Vedio length (in minutes)</label>
+                                                        <input type='number'
+                                                            className={style.input}
+                                                            placeholder="10"
+                                                            value={item.videoLength}
+                                                            onChange={(e) => {
+                                                                const updateData = [...courseContentData]
+                                                                updateData[index].videoLength = e.target.value
                                                                 setCourseContentData(updateData)
                                                             }}
                                                         />

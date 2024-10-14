@@ -1,10 +1,12 @@
 'use client'
 import React from 'react'
-import Heading from '../utils/Heading'
-import Adminsidebar from "../components/Admin/Sidebar/Adminsidebar"
+import Heading from '../../utils/Heading'
+import Adminsidebar from "../../components/Admin/Sidebar/Adminsidebar"
 import AdminProtectd from '@/hooks/adminProtected'
-import DashboardHero from '../components/Admin/DashboardHero'
-type Props = {}
+import DashboardHero from '../../components/Admin/DashboardHero'
+import Editcategory from '@/app/components/customization/Editcategory'
+type Props =  
+ {}
 
 function page({ }: Props) {
     return (
@@ -20,8 +22,9 @@ function page({ }: Props) {
                         <Adminsidebar />
                     </div>
                     <div className="w-[85%] ">
-                <DashboardHero isDashboard={true}/>
-                    </div>
+                <DashboardHero/>
+                <Editcategory/>
+                   </div>
                 </div>
             </AdminProtectd>
         </div>

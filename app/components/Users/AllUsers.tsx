@@ -64,7 +64,7 @@ const AllUsers: FC<Props> = ({ isTeam }) => {
     const columns = [
         { field: "id", headerName: "ID", flex: 0.3 },
         { field: "name", headerName: "Name", flex: 0.5 },
-        { field: "email", headerName: "Email", flex: 0.5 },
+        { field: "email", headerName: "Email-Id", flex: 0.5 },
         { field: "role", headerName: "Role", flex: 0.5 },
         { field: "courses", headerName: "Purchased Courses", flex: 0.5 },
         { field: "created_at", headerName: "Joined At", flex: 0.5 },
@@ -91,7 +91,7 @@ const AllUsers: FC<Props> = ({ isTeam }) => {
             },
         },
         {
-            field: "email",
+            field: "email-icon",
             headerName: "Email",
             flex: 0.2,
             renderCell: (params: any) => {

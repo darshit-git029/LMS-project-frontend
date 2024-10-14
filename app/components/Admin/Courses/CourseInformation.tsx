@@ -2,19 +2,36 @@
 /* eslint-disable @typescript-eslint/no-empty-object-type */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { style } from '@/app/style'
-import React, { FC, useState } from 'react'
+import { useGetHeroDataQuery } from '@/redux/Layout/layoutApi'
+import React, { FC, useEffect, useState } from 'react'
 import { MdTurnRight } from 'react-icons/md'
 
 type Props = {
     courseInfo: any
-    setCourseInfo: (courseinfo: any) => void
+    setCourseInfo: (courseInfo: any) => void
     active: number
     setActive: (active: number) => void
+}
+
+enum LayoutType {
+    CATEGORIES = "Categories"
 }
 
 const CourseInformation: FC<Props> = ({ courseInfo, setCourseInfo, active, setActive }) => {
 
     const [drageing, setDraging] = useState(false)
+
+    const { data } = useGetHeroDataQuery(LayoutType.CATEGORIES,{});
+
+    const [category,setCategory] = useState([])
+
+    useEffect(() => {
+        if(data){
+            setCategory(data?.getLayout[0].category)
+        }
+    },[data])
+    console.log(data);
+    
     const handleSubmit = (e: any) => {
         e.preventDefault()
         setActive(active + 1)
@@ -134,7 +151,8 @@ const CourseInformation: FC<Props> = ({ courseInfo, setCourseInfo, active, setAc
                     </div>
                 </div>
                 <br />
-                <div className="">
+                <div className="w-full flex justify-between">
+                <div className="w-[45%]">
                     <label htmlFor='' className={`${style.label}`}>
                         Course Tags
                     </label>
@@ -152,6 +170,21 @@ const CourseInformation: FC<Props> = ({ courseInfo, setCourseInfo, active, setAc
                     >
                     </input>
                 </div>
+                    <div className="w-[45%]">
+                        <label htmlFor='' className={`${style.label}`}>
+                            Course Categories
+                        </label>
+                        <select name="" id="" value={courseInfo.category}  className={`${style.input} dark:text-white text-black dark:bg-black bg-white` } onChange={(e) => setCourseInfo({...courseInfo, category:e.target.value})}>
+                            <option value="">Select category</option>
+                            {
+                               category.map((item:any) => (
+                                    <option value={item.title} key={item._id}>{item.title}</option>
+                               ))
+                            }
+                        </select>
+                    </div>
+                </div>
+                
                 <br />
                 <div className="w-full flex justify-between">
                     <div className="w-[45%]">
