@@ -39,10 +39,14 @@ const CreateCourse = (props: Props) => {
         estimatedPrice: "",
         tags: "",
         level: "",
+        categories: "",
         demoUrl: "",
         thubnail: "",
     });
+<<<<<<< HEAD
     
+=======
+>>>>>>> 0d6789fdb81da322022f56d1d51c9e2b3214d47c
     const [benefits, setBenefits] = useState([{ title: "" }]);
     const [perrequistites, setPrerequisites] = useState([{ title: "" }]);
     const [courseContentData, setCourseContentData] = useState([
@@ -62,6 +66,12 @@ const CreateCourse = (props: Props) => {
         },
     ]);
 
+<<<<<<< HEAD
+=======
+
+    const [courseData, setCourseData] = useState({});
+
+>>>>>>> 0d6789fdb81da322022f56d1d51c9e2b3214d47c
 
     const [courseData, setCourseData] = useState({});
 
@@ -97,7 +107,11 @@ const CreateCourse = (props: Props) => {
         const data = {
             name: courseInfo.name,
             description: courseInfo.description,
+<<<<<<< HEAD
             category: courseInfo.category,
+=======
+            categories: courseInfo.categories,
+>>>>>>> 0d6789fdb81da322022f56d1d51c9e2b3214d47c
             price: courseInfo.price,
             estimatedPrice: courseInfo.estimatedPrice,
             tags: courseInfo.tags,
