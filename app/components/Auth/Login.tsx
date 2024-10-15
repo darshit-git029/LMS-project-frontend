@@ -9,6 +9,8 @@ import { style } from '../../style'
 import { useLoginMutation } from '@/redux/features/auth/authapi'
 import toast from 'react-hot-toast'
 import { signIn } from 'next-auth/react'
+import { Button } from '@mui/material'
+import { LuLoader2 } from 'react-icons/lu'
 
 
 type Props = {
@@ -25,8 +27,9 @@ const schema = Yup.object().shape({
 
 const Login: FC<Props> = ({setRoute,setOpen}) => {
 
+
     const [show, setShow] = useState(false)
-    const [login,{isSuccess,error}] = useLoginMutation()
+    const [login,{isSuccess,error,isLoading}] = useLoginMutation()
 
     const formik = useFormik({
         initialValues: { email: "", password: "" },
@@ -52,11 +55,12 @@ const Login: FC<Props> = ({setRoute,setOpen}) => {
     const { errors, touched, values, handleChange, handleSubmit } = formik
 
     return (
+                
         <div className='w-full p-2'>
             <h1 className={`${style.title}`}>
                 Login with Elearning
             </h1>
-            <form onSubmit={handleSubmit}>
+            <form  onSubmit={handleSubmit}>
                 <label className={`${style.label}`} htmlFor="email">
                     Enter your Email
                 </label>
@@ -104,8 +108,19 @@ const Login: FC<Props> = ({setRoute,setOpen}) => {
                         <span className="text-red-500 pt-2 block">{errors.password}</span>
                     )}
                 </div>
+               
                 <div className="w-full mt-5">
-                    <input type="submit" value="Login" className={`${style.button}`} />
+                    {
+                        isLoading ? (
+                            <Button className={`${style.button}`}>
+                            <LuLoader2 className="mr-2 h-4 w-4 animate-spin" />
+                            Please Wait
+                          </Button>                
+                        ) : (
+                            <input type="submit" value="Login" className={`${style.button}`}/>
+                        )
+                    }
+
                 </div>
                 <br />
                 <h5 className="text-center pt-4 font-Poppins text-[14px] text-black dark:text-white">

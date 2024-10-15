@@ -20,8 +20,9 @@ type Props = {
 
 const EditCourse: FC<Props> = ({ id }) => {
 
-
+    
     const [editCourse, { isSuccess, error }] = useEditCourseMutation();
+    const [courseData, setCourseData] = useState({});
     const [active, setActive] = useState(0);
     const { data, refetch } = useGetAllCourseQuery(
         {},
@@ -42,7 +43,7 @@ const EditCourse: FC<Props> = ({ id }) => {
             }
         }
     }, [isSuccess, error]);
-
+    
 
 
     useEffect(() => {
@@ -58,13 +59,13 @@ const EditCourse: FC<Props> = ({ id }) => {
                 demoUrl: editCourseData.demoUrl,
                 thubnail: editCourseData?.thubnail?.url,
             })
-            setBenefits(editCourseData.benefits);
-            setPrerequisites(editCourseData.perrequistites);
-            setCourseContentData(editCourseData.courseData);
+            setBenefits(editCourseData.benefits)
+            setPrerequisites(editCourseData.perrequistites)
+            setCourseContentData(editCourseData.courseData)
         }
     }, [editCourseData]);
-
-
+    
+    
     const [courseInfo, setCourseInfo] = useState({
         name: "",
         description: "",
@@ -93,9 +94,6 @@ const EditCourse: FC<Props> = ({ id }) => {
             suggestion: "",
         },
     ]);
-
-    const [courseData, setCourseData] = useState({});
-
 
 
     const handleSubmit = async () => {
@@ -133,11 +131,12 @@ const EditCourse: FC<Props> = ({ id }) => {
             totalVideos: courseContentData.length,
             benefits: formattedBenefits,
             perrequistites: formattedPrerequisites,
-            courseContent: formattedCourseContentData,
+            courseData: formattedCourseContentData,
         };
 
         setCourseData(data);
     };
+
 
 
     const handleCourseCreate = async (e: any) => {

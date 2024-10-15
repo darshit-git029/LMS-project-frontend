@@ -33,7 +33,7 @@ export const apiSlice = createApi({
                 );
                 
             } catch (error: any) {
-                toast.error(error.message)
+
             }
         },
         

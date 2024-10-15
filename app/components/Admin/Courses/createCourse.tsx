@@ -10,6 +10,7 @@ import CoursePreview from "./CoursePreview";
 import { useCreateCourseMutation } from "../../../../redux/features/courses/courseApi";
 import { toast } from "react-hot-toast";
 import { redirect } from "next/navigation";
+import Loader from "../../Loaders/Loader";
 
 type Props = {};
 
@@ -34,7 +35,7 @@ const CreateCourse = (props: Props) => {
     const [courseInfo, setCourseInfo] = useState({
         name: "",
         description: "",
-        category:"",
+        category: "",
         price: "",
         estimatedPrice: "",
         tags: "",
@@ -43,7 +44,7 @@ const CreateCourse = (props: Props) => {
         demoUrl: "",
         thubnail: "",
     });
-    
+
     const [benefits, setBenefits] = useState([{ title: "" }]);
     const [perrequistites, setPrerequisites] = useState([{ title: "" }]);
     const [courseContentData, setCourseContentData] = useState([
@@ -65,7 +66,7 @@ const CreateCourse = (props: Props) => {
 
 
     const [courseData, setCourseData] = useState({});
-        
+
     const handleSubmit = async () => {
         const formattedBenefits = benefits.map((benefit) => ({
             title: benefit.title,
@@ -110,7 +111,9 @@ const CreateCourse = (props: Props) => {
 
     const handleCourseCreate = async (e: any) => {
         const data = courseData;
-        if (!isLoading) {
+        if (isLoading) {
+            <Loader />
+        } else {
             await createCourse(data);
         }
     };

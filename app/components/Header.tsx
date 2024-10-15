@@ -15,7 +15,6 @@ import avatarDefault from "../../../client/assect/client-1.jpg"
 import { useSession } from 'next-auth/react'
 import { useLogoutQuery, useSocialAuthMutation } from '@/redux/features/auth/authapi'
 import toast from 'react-hot-toast'
-import { imageListItemClasses } from '@mui/material'
 
 type Props = {
     open: boolean;
@@ -137,7 +136,7 @@ const Header: FC<Props> = ({ activeItem, setOpen, Route, open, setRoute }) => {
                                             height={120}
                                             alt=''
                                             className='rounded-full w-[30px] h-[30px] cursor-pointer'
-                                            style={{border: activeItem === 5 ? "2px solid #ffc107" : "none"}}
+                                            style={{ border: activeItem === 5 ? "2px solid #ffc107" : "none" }}
 
                                         />
                                     </Link>
@@ -145,8 +144,8 @@ const Header: FC<Props> = ({ activeItem, setOpen, Route, open, setRoute }) => {
                                     <HiOutlineUserCircle
                                         className='hidden 800px:block cursor-pointer dark:text-white text-black'
                                         size={25}
-                                        onClick={() => setOpen(true)}
-                                        
+                                        onClick={(e) => (e.preventDefault(), setOpen(true))}
+
                                     />
                                 )
                             }
