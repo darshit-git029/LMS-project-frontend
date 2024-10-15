@@ -57,7 +57,6 @@ const Header: FC<Props> = ({ activeItem, setOpen, Route, open, setRoute }) => {
     }, [data, user, socialAuth, isSuccess, error])
 
 
-    console.log(data);
 
 
 
@@ -95,7 +94,6 @@ const Header: FC<Props> = ({ activeItem, setOpen, Route, open, setRoute }) => {
         }
     }
 
-    console.log(user);
 
 
     return (
@@ -177,7 +175,6 @@ const Header: FC<Props> = ({ activeItem, setOpen, Route, open, setRoute }) => {
                     )
                 }
             </div>
-            {/* LOGIN/ SIGNUP MODAL LOGIC */}
             {
                 Route === "Login" && (
                     <>{

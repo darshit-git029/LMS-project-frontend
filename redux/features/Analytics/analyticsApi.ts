@@ -3,7 +3,6 @@ import { apiSlice } from "../apiSlice";
 
 export const courseAnalyticsApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        // endpoints here
         getCourseAnalytics: builder.query({
             query : () => ({
                 url:"get-course-analytics",

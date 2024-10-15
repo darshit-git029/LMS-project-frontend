@@ -22,7 +22,6 @@ type Props = {
 
 const SidebarProfile: FC<Props> = ({ user, active, avatar, logoutHandler, setActive }) => {
     const { data } = useSession()
-    console.log("profile data", data);
     const [loaduser, setLoaduser] = useState(false)
 
     useEffect(() => {

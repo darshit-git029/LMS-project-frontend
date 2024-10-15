@@ -65,22 +65,15 @@ const CreateCourse = (props: Props) => {
 
 
     const [courseData, setCourseData] = useState({});
-
-
-
-    console.log(courseData);
-    
+        
     const handleSubmit = async () => {
-        // Format benefits array
         const formattedBenefits = benefits.map((benefit) => ({
             title: benefit.title,
         }));
-        // Format prerequisites array
         const formattedPrerequisites = perrequistites.map((perrequistites) => ({
             title: perrequistites.title,
         }));
 
-        // Format course content array
         const formattedCourseContentData = courseContentData?.map(
             (courseContent) => ({
                 videoUrl: courseContent.videoUrl,
@@ -96,7 +89,6 @@ const CreateCourse = (props: Props) => {
             })
         );
 
-        //   prepare our data object
         const data = {
             name: courseInfo.name,
             description: courseInfo.description,

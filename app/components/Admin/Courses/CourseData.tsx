@@ -30,7 +30,6 @@ const CourseData: FC<Props> = ({
   };
 
   const handleAddBenefit = () => {
-    // Add only if the last benefit title is not empty
     if (benefits[benefits.length - 1]?.title !== "") {
       setBenefits([...benefits, { title: "" }]);
     } else {

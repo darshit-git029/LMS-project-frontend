@@ -1,3 +1,4 @@
+"use client"
 import React, { FC, useEffect, useState } from 'react'
 import UserAnalytics from '../Analytics/UserAnalytics'
 import { PiUsersFourLight } from 'react-icons/pi'

@@ -1,9 +1,7 @@
 import { apiSlice } from "../apiSlice";
 
-
 export const courseApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        // endpoints here
         createCourse: builder.mutation({
             query: (data) => ({
                 url: "create/course",

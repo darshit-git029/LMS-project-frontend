@@ -30,7 +30,6 @@ const CourseInformation: FC<Props> = ({ courseInfo, setCourseInfo, active, setAc
             setCategory(data?.getLayout[0].category)
         }
     },[data])
-    console.log(data);
     
     const handleSubmit = (e: any) => {
         e.preventDefault()

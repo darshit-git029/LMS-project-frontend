@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { userLoggedIn } from "./auth/authSlice";
+import toast from "react-hot-toast";
 
 export const apiSlice = createApi({
     reducerPath: "api",
@@ -32,8 +33,7 @@ export const apiSlice = createApi({
                 );
                 
             } catch (error: any) {
-
-                console.log(error);
+                toast.error(error.message)
             }
         },
         

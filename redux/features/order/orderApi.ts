@@ -5,7 +5,7 @@ import { apiSlice } from "../apiSlice";
     endpoints: (builder) => ({
         getAllOrder: builder.query({
             query: () => ({
-                url: "get/order-admin", //get/all/course
+                url: "get/order-admin",
                 method: "GET",
                 credentials: "include" as const,
             }),

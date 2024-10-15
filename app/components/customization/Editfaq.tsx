@@ -18,7 +18,6 @@ function Editfaq({ }: Props) {
 
     }
     const { data, isLoading,refetch } = useGetHeroDataQuery(LayoutType.FAQ, { refetchOnMountOrArgChange: true })
-    console.log(data);
 
     
     const [editLayout, { isSuccess, error }] = useEditLayoutMutation()

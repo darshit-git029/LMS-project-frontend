@@ -1,4 +1,5 @@
-'use client'
+
+import toast from "react-hot-toast";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { apiSlice } from "../apiSlice";
 import { userLoggedIn, userLoggout, userregistration } from "./authSlice";
@@ -12,7 +13,6 @@ type RegistrationData = {};
 
 export const authApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        // endpoints here
         register: builder.mutation<RegistrationResponse, RegistrationData>({
             query: (data) => ({
                 url: "registration",
@@ -29,7 +29,7 @@ export const authApi = apiSlice.injectEndpoints({
                     })
                   );
                 } catch (error: any) {
-                  console.log(error);
+                    toast.error(error.message)
                 }
               },
         }),
@@ -64,7 +64,8 @@ export const authApi = apiSlice.injectEndpoints({
                   })
                 );
               } catch (error: any) {
-                console.log(error);
+                toast.error(error.message)
+
               }
             },
           }), 
@@ -89,7 +90,8 @@ export const authApi = apiSlice.injectEndpoints({
                   })
                 );
               } catch (error: any) {
-                console.log(error);
+                toast.error(error.message)
+
               }
             },
           }), 
@@ -105,7 +107,8 @@ export const authApi = apiSlice.injectEndpoints({
                   userLoggout() 
                 );
               } catch (error: any) {
-                console.log(error);
+                toast.error(error.message)
+
               }
             },
           }),

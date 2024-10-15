@@ -1,10 +1,7 @@
-'use client'
 import { apiSlice } from "../apiSlice";
-
 
 export const userapi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        // endpoints here
         updateAvatar: builder.mutation({
             query: (avatar) => ({
                 url: "update/profile/picture",

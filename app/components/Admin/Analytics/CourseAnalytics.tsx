@@ -14,17 +14,6 @@ const CourseAnalytics = (props: Props) => {
 
     const { data, isLoading, error } = useGetCourseAnalyticsQuery({})
 
-    // const analyticdata = [
-    //     { name: "jan", uv: 4 },
-    //     { name: "feb", uv: 10 },
-    //     { name: "mar", uv: 6 },
-    //     { name: "apr", uv: 5 },
-    //     { name: "may", uv: 9 },
-    //     { name: "jun", uv: 7 },
-    //     { name: "jul", uv: 5 },
-    //     { name: "sep", uv: 2 },
-
-    // ]
 
     const analyticsData:any = []
 

@@ -29,7 +29,6 @@ const page = ({params}:any) => {
                     </div>
                     <div className="w-[85%] ">
                     <DashboardHeader notifications={[]}/>
-                    {/* <CreateCourse/> */}
                     <EditCourse id={id}/>
                     </div>
                 </div>    

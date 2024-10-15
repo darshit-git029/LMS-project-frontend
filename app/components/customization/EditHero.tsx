@@ -24,7 +24,6 @@ const EditHero: FC<Props> = (props: Props) => {
   const { data , refetch} = useGetHeroDataQuery(LayoutType.BANNER, {
     refetchOnMountOrArgChange:true
   });
-  console.log(data);
   
   const [editLayout, { isLoading, isSuccess, error }] = useEditLayoutMutation();
 
@@ -102,7 +101,7 @@ const EditHero: FC<Props> = (props: Props) => {
               type="file"
               id="banner"
               accept="image/*"
-              onChange={handleUpdate}  // Trigger file handling on change
+              onChange={handleUpdate} 
               className="hidden"
             />
             <label htmlFor="banner" className="absolute bottom-0 right-0 z-20">

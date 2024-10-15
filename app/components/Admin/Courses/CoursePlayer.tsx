@@ -17,7 +17,6 @@ const CoursePlayer: FC<Props> = ({ videoUrl, title }) => {
             videoId: videoUrl
         }).then((res) => {  
             setVedioData(res.data)
-            console.log(res.data);
         })
     }, [videoUrl])
     

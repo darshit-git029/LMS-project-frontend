@@ -18,7 +18,6 @@ type Props = {
 function DashboardHeader({ notifications  ,open ,setOpen}: Props) {
 
     const handleNotificationStatusChange = (id: string) => {
-        console.log(`Marking notification ${id} as read`)
     }
 
     return (
