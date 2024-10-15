@@ -8,22 +8,15 @@ import { MdTurnRight } from 'react-icons/md'
 
 type Props = {
     courseInfo: any
-<<<<<<< HEAD
-    setCourseInfo: (courseInfo: any) => void
-=======
     setCourseInfo: (courseinfo: any) => void
->>>>>>> 0d6789fdb81da322022f56d1d51c9e2b3214d47c
     active: number
     setActive: (active: number) => void
 }
 
-<<<<<<< HEAD
 enum LayoutType {
     CATEGORIES = "Categories"
 }
 
-=======
->>>>>>> 0d6789fdb81da322022f56d1d51c9e2b3214d47c
 const CourseInformation: FC<Props> = ({ courseInfo, setCourseInfo, active, setActive }) => {
 
     const [drageing, setDraging] = useState(false)

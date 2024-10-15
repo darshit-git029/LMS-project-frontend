@@ -1,10 +1,7 @@
-<<<<<<< HEAD
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable @typescript-eslint/no-empty-object-type */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-=======
->>>>>>> 0d6789fdb81da322022f56d1d51c9e2b3214d47c
 import { style } from '@/app/style';
 import { useEditLayoutMutation, useGetHeroDataQuery } from '@/redux/Layout/layoutApi';
 import React, { FC, useEffect, useState } from 'react';
@@ -16,12 +13,8 @@ type Props = {}
 const EditHero: FC<Props> = (props: Props) => {
   enum LayoutType {
     BANNER = 'banner',
-<<<<<<< HEAD
-
-=======
     FAQ = 'FAQ',
     CATEGORY = 'Categories'
->>>>>>> 0d6789fdb81da322022f56d1d51c9e2b3214d47c
 }
 
   const [image, setImage] = useState(""); 
@@ -44,11 +37,7 @@ const EditHero: FC<Props> = (props: Props) => {
 
     if (isSuccess) {
       refetch()
-<<<<<<< HEAD
-      toast.success("Hero updated successfully.");
-=======
       toast.success("Hero updated successfully!");
->>>>>>> 0d6789fdb81da322022f56d1d51c9e2b3214d47c
     }
 
     if (error) {
@@ -57,11 +46,7 @@ const EditHero: FC<Props> = (props: Props) => {
         toast.error(errorData?.data?.message);
       }
     }
-<<<<<<< HEAD
-  }, [data, isSuccess, error,refetch]);
-=======
   }, [data, isSuccess, error]);
->>>>>>> 0d6789fdb81da322022f56d1d51c9e2b3214d47c
 
   const handleUpdate = (e: any) => {
     e.preventDefault(); 
