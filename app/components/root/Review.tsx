@@ -3,22 +3,21 @@ import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import ReviewCard from '../Reviews/ReviewCard';
 import { useGetAlluserCourseQuery } from '@/redux/features/courses/courseApi';
+import Loader from '../Loaders/Loader';
 
 type Props = {};
 
 const Review = (props: Props) => {
     const { data, isLoading } = useGetAlluserCourseQuery({});
     const [course, setCourses] = useState<any[]>([]);
-
     useEffect(() => {
         if (data?.course) {
             setCourses(data.course);
         }
     }, [data]);
-    console.log(data);
     
     if (isLoading) {
-        return <p>Loading...</p>; // Handle loading state
+        <Loader/>
     }
 
     return (
@@ -45,7 +44,7 @@ const Review = (props: Props) => {
             </div>
             <br /><br />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-[25px] mb-12 border-0">
-                {course && course.map((course, index) => (
+                {course.map((course, index) => (
                     <ReviewCard item={course} key={index} />
                 ))}
             </div>

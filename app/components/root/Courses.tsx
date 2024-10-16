@@ -13,7 +13,6 @@ function Courses({ }: Props) {
     useEffect(() => {
         setCourse(data?.course)
     }, [data])
-        console.log(data);
         
     return (
         <div className='w-[90%] 800px:w-[80%] m-auto'>

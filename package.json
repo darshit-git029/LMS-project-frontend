@@ -15,6 +15,8 @@
     "@mui/material": "^6.1.2",
     "@mui/x-data-grid": "^7.20.0",
     "@reduxjs/toolkit": "^2.2.7",
+    "@stripe/react-stripe-js": "^2.8.1",
+    "@stripe/stripe-js": "^4.8.0",
     "axios": "^1.7.7",
     "client": "file:",
     "formik": "^2.4.6",

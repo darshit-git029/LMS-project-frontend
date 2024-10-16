@@ -93,7 +93,7 @@ const Allcourses = ({ }: Props) => {
             rows.push({
                 id: item._id,
                 name: item.name,
-                rating: item.rating,
+                rating: item.rating.toFixed(2),
                 purchased: item.purchased,
                 createdAt: format(item.createdAt)
             })
