@@ -12,7 +12,7 @@ const ReviewCard = ({ item }: Props) => {
     <div className="w-full dark:bg-slate-500 dark:opacity-0.20 border dark:border-[#ffffff1d] border-[#00000015] dark:shadow-[bg-slate-700] rounded-lg p-3 shadow-sm dark:shadow-inner">
       <div className="flex w-full">
         <Image
-          src={item?.reviews[4]?.user?.avatar.url}
+          src={item?.reviews[4]?.avatar?.url ? item?.reviews[4].avatar?.url : avatarDefault}
           alt="review"
           width={50}
           height={50}

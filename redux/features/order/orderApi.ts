@@ -21,7 +21,7 @@ import { apiSlice } from "../apiSlice";
         }),
         getPayment:builder.mutation({
             query:(amount) => ({
-                url:"/payment",
+                url:"payment",
                 method:"POST",
                 body:{amount},
                 credentials:"include" as const

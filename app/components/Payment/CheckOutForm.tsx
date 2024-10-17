@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { style } from '@/app/style'
 import { useLoaduserQuery } from '@/redux/features/apiSlice'
-import { useGetPaymentMutation } from '@/redux/features/order/orderApi'
+import { useCreateOrderMutation, useGetPaymentMutation } from '@/redux/features/order/orderApi'
 import { Flag } from '@mui/icons-material'
 import { LinkAuthenticationElement, PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js'
-import { redirect } from 'next/dist/server/api-utils'
+import { redirect } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { useSelector } from 'react-redux'
@@ -12,19 +12,19 @@ import { useSelector } from 'react-redux'
 type Props = {
     setOpen: any
     data: any
-    user: any
-}
+  }
 
 const CheckOutForm = ({ setOpen, data }: Props) => {
 
     const stripe = useStripe()
     const elements = useElements()
     const [message, setMessage] = useState<any>("")
-    const [createOrder, { data: orderData }] = useGetPaymentMutation()
-    const [loadUser, setLoaduser] = useState()
-    const { } = useLoaduserQuery(loadUser ? false : true)
+    const [createOrder, { data: orderData,error }] = useCreateOrderMutation()
+    const [loadUser, setLoaduser] = useState(false)
+    const { } = useLoaduserQuery({skip: loadUser ? false : true})
     const [isLoading, setisLoading] = useState(false)
-
+    console.log(data);
+    
     const handleSubmit = async (e: any) => {
         e.preventDefault();
         if (!stripe || !elements) {
@@ -46,15 +46,19 @@ const CheckOutForm = ({ setOpen, data }: Props) => {
     
       useEffect(() => {
        if(orderData){
-        redirect(`/course-access/${data._id}`);
-       }
-       if(Error){
-        if ("data" in Error) {
-            const errorMessage = Error as any;
+        setLoaduser(true)
+        toast.success("order create completed")
+        redirect(`/course-access/${data._id}`)
+      }
+       console.log(orderData);
+       
+       if(error){
+        if ("data" in error) {
+            const errorMessage = error as any;
             toast.error(errorMessage.data.message);
           }
        }
-      }, [orderData,Error])
+      }, [orderData,error])
       
     return (
         <form id="payment-form" onSubmit={handleSubmit}>
@@ -62,7 +66,7 @@ const CheckOutForm = ({ setOpen, data }: Props) => {
             <PaymentElement id="payment-element" />
             <button disabled={isLoading || !stripe || !elements} id="submit">
                 <span id="button-text">
-                    {isLoading ? <div className={`${style.button} spinner dark:text-white text-black `} id="spinner"></div> : <div className={`${style.button}  dark:text-white text-black mt-5 `}> Pay now</div>}
+                    {isLoading ? <div className= "spinner" ></div> : <div className={`${style.button}  dark:text-white text-black mt-5 `}> Pay now</div>}
                 </span>
             </button>
             {/* Show any error or success messages */}

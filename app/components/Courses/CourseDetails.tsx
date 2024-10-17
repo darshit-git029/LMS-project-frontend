@@ -15,6 +15,7 @@ import CourseContentList from './CourseContentList';
 import Footer from '../../Footer/Footer';
 import {Elements} from "@stripe/react-stripe-js"
 import CheckOutForm from '../Payment/CheckOutForm';
+import { useLoaduserQuery } from '@/redux/features/apiSlice';
 type Props = {
     data: any
     stripePromise:any
@@ -27,15 +28,16 @@ const CourseDetails = ({ data,stripePromise,clientSecret }: Props) => {
 
 
     console.log(data);
-    const { user } = useSelector((state: any) => state.auth)
+    const { data:userData } = useLoaduserQuery(undefined,{})
+    const user = userData?.user
     console.log(user);
     const discountPercentage = (( data.price / data.estimatedPrice * 100))
     console.log(discountPercentage);
 
     const discountPercentagePrice = discountPercentage.toFixed(0)
 
-    const isPurchased = user && user?.course?.find((item: any) => item._id === data._id)
-   
+    const isPurchased = user && user?.courses?.find((item: any) => item._id === data._id)
+
     const handlerOrder = (e: any) => {
         setOpen(true)
 
@@ -265,7 +267,7 @@ const CourseDetails = ({ data,stripePromise,clientSecret }: Props) => {
               <div className="w-full">
                 {stripePromise && clientSecret && (
                   <Elements stripe={stripePromise} options={{ clientSecret }}>
-                    <CheckOutForm setOpen={setOpen} data={data} user={user}  />
+                    <CheckOutForm setOpen={setOpen} data={data} />
                   </Elements>
                 )}
               </div>
