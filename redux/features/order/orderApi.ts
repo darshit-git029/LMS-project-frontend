@@ -1,4 +1,3 @@
-import build from "next/dist/build";
 import { apiSlice } from "../apiSlice";
 
 
@@ -36,9 +35,10 @@ import { apiSlice } from "../apiSlice";
                 },
                 credentials:"include" as const
             })
-        })
+        }),
+        
     })
 
 })
 
-export const  {useGetAllOrderQuery,useGetPaymentMutation,useGetstripePublishKeyQuery,useCreateOrderMutation} = Orderapi
+export const  {useGetAllOrderQuery,useGetPaymentMutation,useGetstripePublishKeyQuery,useCreateOrderMutation } = Orderapi

@@ -62,7 +62,7 @@ const CourseDetailsPage = ({ id }: Props) => {
                     />
                     {
                         stripePromise && (
-                            <CourseDetails data={data.course} stripePromise={stripePromise} clientSecret={clientSecret}/>
+                            <CourseDetails data={data.course}  stripePromise={stripePromise} clientSecret={clientSecret}/>
                         )
                     }
                     <Footer/>

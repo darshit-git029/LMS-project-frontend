@@ -13,37 +13,37 @@ import CoursePlayer from '../Admin/Courses/CoursePlayer';
 import Link from 'next/link';
 import CourseContentList from './CourseContentList';
 import Footer from '../../Footer/Footer';
-import {Elements} from "@stripe/react-stripe-js"
+import { Elements } from "@stripe/react-stripe-js"
 import CheckOutForm from '../Payment/CheckOutForm';
 import { useLoaduserQuery } from '@/redux/features/apiSlice';
 type Props = {
-    data: any
-    stripePromise:any
-    clientSecret:string
+  data: any
+  stripePromise: any
+  clientSecret: string
 }
 
-const CourseDetails = ({ data,stripePromise,clientSecret }: Props) => {
+const CourseDetails = ({ data, stripePromise, clientSecret }: Props) => {
 
-    const [open,setOpen] = useState(false)
+  const [open, setOpen] = useState(false)
 
 
-    console.log(data);
-    const { data:userData } = useLoaduserQuery(undefined,{})
-    const user = userData?.user
-    console.log(user);
-    const discountPercentage = (( data.price / data.estimatedPrice * 100))
-    console.log(discountPercentage);
+  console.log(data);
+  const { data: userData } = useLoaduserQuery(undefined, {})
+  const user = userData?.user
+  console.log(user);
+  const discountPercentage = ((data.price / data.estimatedPrice * 100))
+  console.log(discountPercentage);
 
-    const discountPercentagePrice = discountPercentage.toFixed(0)
+  const discountPercentagePrice = discountPercentage.toFixed(0)
 
-    const isPurchased = user && user?.courses?.find((item: any) => item._id === data._id)
+  const isPurchased = user && user?.courses?.find((item: any) => item._id === data._id)
 
-    const handlerOrder = (e: any) => {
-        setOpen(true)
+  const handlerOrder = (e: any) => {
+    setOpen(true)
 
-    }
+  }
 
-    return (
+  return (
     <div>
       <div className="w-[90%] 800px:w-[90%] m-auto py-5 h-auto">
         <div className="w-full flex flex-col-reverse 800px:flex-row">
@@ -172,6 +172,33 @@ const CourseDetails = ({ data,stripePromise,clientSecret }: Props) => {
                         <Ratings rating={item.rating} />
                       </div>
                     </div>
+                    {item.commentReplies && item?.commentReplies.map((i: any, index: number) => (
+                <div className="w-full flex 800px:ml-16 my-5" key={index}>
+                  <div className="w-[50px] h-[50px]">
+                    <Image
+                      src={
+                        i.user.avatar
+                          ? i.user.avatar.url
+                          : "https://res.cloudinary.com/dshp9jnuy/image/upload/v1665822253/avatars/nrxsg8sd9iy10bbsoenn.png"
+                      }
+                      width={50}
+                      height={50}
+                      alt=""
+                      className="w-[50px] h-[50px] rounded-full object-cover"
+                    />
+                  </div>
+                  <div className="pl-2">
+                    <div className="flex items-center">
+                      <h5 className="text-[20px]">{i.user.name}</h5>{" "}
+                      <VscVerifiedFilled className="text-[#0095F6] ml-2 text-[20px]" />
+                    </div>
+                    <p>{i.comment}</p>
+                    <small className="text-[#ffffff83]">
+                      {format(i.createdAt)} •
+                    </small>
+                  </div>
+                </div>
+              ))}
                     {item?.questions?.questionReplies.map((i: any, index: number) => (
                       <div className="w-full flex 800px:ml-16 my-5" key={index}>
                         <div className="w-[50px] h-[50px]">
@@ -202,6 +229,7 @@ const CourseDetails = ({ data,stripePromise,clientSecret }: Props) => {
                   </div>
                 )
               )}
+          
             </div>
           </div>
           <div className="w-full 800px:w-[35%] relative">
@@ -231,7 +259,7 @@ const CourseDetails = ({ data,stripePromise,clientSecret }: Props) => {
                   <div
                     className={`${style.button} !w-[180px] my-3 font-Poppins cursor-pointer !bg-[crimson]`}
                     onClick={handlerOrder}
-                  > 
+                  >
                     Buy Now {data.price}$
                   </div>
                 )}
