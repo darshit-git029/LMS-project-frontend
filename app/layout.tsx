@@ -6,9 +6,13 @@ import { ThemeProvider } from "./utils/theme.provider";
 import { Toaster } from "react-hot-toast";
 import { Providers } from "./provider";
 import { SessionProvider } from "next-auth/react";
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import { useLoaduserQuery } from "@/redux/features/apiSlice";
 import Loader from "./components/Loaders/Loader";
+import socketIO from "socket.io-client"
+const ENDPOINT = process.env.NEXT_PUBLIC_SOCKET_SERVER_URL || ""
+const socketId = socketIO(ENDPOINT, { transports: ["websocket"] })
+
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -44,13 +48,16 @@ export default function RootLayout({
   );
 }
 
-const Custom: React.FC<{children:ReactNode}> = ({children}) => {
-  const {isLoading} = useLoaduserQuery({})
+const Custom: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const { isLoading } = useLoaduserQuery({})
+  useEffect(() => {
+    socketId.on("connection", () => { })
+  }, [])
   return (
     <>
-        {
-          isLoading ? <Loader/> : <>{children}</>
-        }
+      {
+        isLoading ? <Loader /> : <>{children}</>
+      }
     </>
   )
 }

@@ -20,7 +20,7 @@ const CourseContentList: FC<Props> = (props) => {
     ...new Set<string>(props?.data?.map((item: any) => item.videoSection)),
   ];
 
-  let totalCount: number = 0; // Total count of videos from previous sections
+  let totalCount: number = 0; 
 
   const toggleSection = (section: string) => {
     const newVisibleSections = new Set(visibleSections);
@@ -48,8 +48,8 @@ const CourseContentList: FC<Props> = (props) => {
           (totalLength: number, item: any) => totalLength + item.videoLength,
           0
         );
-        const sectionStartIndex: number = totalCount; // Start index of videos within the current section
-        totalCount += sectionVideoCount; // Update the total count of videos
+        const sectionStartIndex: number = totalCount;
+        totalCount += sectionVideoCount;
 
         const sectionContentHours: number = sectionVideoLength / 60;
 
@@ -83,7 +83,7 @@ const CourseContentList: FC<Props> = (props) => {
             {isSectionVisible && (
               <div className="w-full">
                 {sectionVideos.map((item: any, index: number) => {
-                  const videoIndex: number = sectionStartIndex + index; // Calculate the video index within the overall list
+                  const videoIndex: number = sectionStartIndex + index; 
                   const contentLength: number = item.videoLength / 60;
                   return (
                     <div

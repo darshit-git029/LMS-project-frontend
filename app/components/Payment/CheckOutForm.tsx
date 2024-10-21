@@ -8,13 +8,17 @@ import { redirect } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { useSelector } from 'react-redux'
+import socketIO from "socket.io-client"
+const ENDPOINT = process.env.NEXT_PUBLIC_SOCKET_SERVER_URL || ""
+const socketId = socketIO(ENDPOINT, { transports: ["websocket"] })
 
 type Props = {
     setOpen: any
     data: any
+    user:any
   }
 
-const CheckOutForm = ({ setOpen, data }: Props) => {
+const CheckOutForm = ({ setOpen, data ,user}: Props) => {
 
     const stripe = useStripe()
     const elements = useElements()
@@ -48,6 +52,11 @@ const CheckOutForm = ({ setOpen, data }: Props) => {
        if(orderData){
         setLoaduser(true)
         toast.success("order create completed")
+        socketId.emit("notification", {
+          title:"New Order",
+          message:`You have new order from ${data.name}`,
+          userId:user._id
+        })
         redirect(`/course-access/${data._id}`)
       }
        console.log(orderData);
@@ -55,7 +64,6 @@ const CheckOutForm = ({ setOpen, data }: Props) => {
        if(error){
         if ("data" in error) {
             const errorMessage = error as any;
-            toast.error(errorMessage.data.message);
           }
        }
       }, [orderData,error])

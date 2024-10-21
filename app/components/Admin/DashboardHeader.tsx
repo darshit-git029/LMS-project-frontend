@@ -1,23 +1,56 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import ThemeSwitcher from '@/app/utils/ThemeSwitcher'
-import React, { useState } from 'react'
+import { useGetAllNotificationQuery, useUpdateNotificationstatusMutation } from '@/redux/features/notification/notificationApi'
+import React, { useEffect, useState } from 'react'
 import { IoMdNotificationsOutline } from 'react-icons/io'
+import { format } from 'timeago.js'
+import socketIO from "socket.io-client"
+const ENDPOINT = process.env.NEXT_PUBLIC_SOCKET_SERVER_URL || ""
+const socketId = socketIO(ENDPOINT, { transports: ["websocket"] })
 
-type Notification = {
-    _id: string
-    title: string
-    message: string
-    createdAt: string
-}
+
 
 type Props = {
-    notifications: Notification[]
     open?:boolean
     setOpen?: any
 }
 
-function DashboardHeader({ notifications  ,open ,setOpen}: Props) {
+function DashboardHeader({   open ,setOpen}: Props) {
 
-    const handleNotificationStatusChange = (id: string) => {
+    const {data,refetch} = useGetAllNotificationQuery(undefined,{refetchOnMountOrArgChange:true})
+    const [updateNotificationstatus,{isSuccess}] = useUpdateNotificationstatusMutation()
+    const [notification,setNotification] = useState<any>([])
+
+    const [audio] = useState(
+        new Audio(
+            "https://res.cloudinary.com/demo/video/upload/du_3.0,so_2.0/ac_mp3,br_44k/docs/firefly-tune.mp3"
+        )
+    )
+    const playerNotification = () => {
+        audio.play()
+    }
+
+    useEffect(() => {
+        if(data){
+            setNotification(
+                data.notification.filter((item:any) => item.status === "unread")
+            )
+        }
+        if(isSuccess){
+            refetch()
+        }
+        audio.load()
+    },[data,isSuccess])
+
+    useEffect(() => {
+        socketId.on("newNotification",(data) => {
+            refetch()
+            playerNotification()
+        })
+    },[refetch])
+
+    const handleNotificationStatusChange = async (id: string) => {
+            await updateNotificationstatus(id)
     }
 
     return (
@@ -26,7 +59,7 @@ function DashboardHeader({ notifications  ,open ,setOpen}: Props) {
             <div className="relative cursor-pointer m-2" onClick={() => setOpen(!open)}>
                 <IoMdNotificationsOutline className="text-2xl cursor-pointer text-black dark:text-white" />
                 <span className="absolute -top-2 right-2 rounded-full bg-[#37a39a] w-[18px] h-[18px] text-[12px] flex items-center justify-center text-white">
-                   3
+                   {notification && notification.length}
                 </span>
             </div>
             {open && (
@@ -34,8 +67,8 @@ function DashboardHeader({ notifications  ,open ,setOpen}: Props) {
                     <h5 className="text-center text-[20px] font-Poppins text-black dark:text-white p-3">
                         Notifications
                     </h5>
-                    {notifications ? (
-                        notifications.map((item: Notification, index: number) => (
+                    {notification ? (
+                        notification.map((item: Notification, index: number) => (
                             <div
                                 className="dark:bg-[#2d3a4e] bg-[#00000013] font-Poppins border-b dark:border-b-[#ffffff47] border-b-[#0000000f]"
                                 key={index}

@@ -16,6 +16,7 @@ import { LuLoader2 } from 'react-icons/lu'
 type Props = {
     setRoute: (Route: string) => void
     setOpen:(open:boolean) => void
+    refetch?:any
 }
 
 const schema = Yup.object().shape({
@@ -25,7 +26,7 @@ const schema = Yup.object().shape({
 
 
 
-const Login: FC<Props> = ({setRoute,setOpen}) => {
+const Login: FC<Props> = ({setRoute,setOpen,refetch}) => {
 
 
     const [show, setShow] = useState(false)
@@ -43,6 +44,7 @@ const Login: FC<Props> = ({setRoute,setOpen}) => {
         if(isSuccess){
             setOpen(false)
             toast.success("Login Successfully")
+            refetch()
         }if(error){
             if("data" in error){
                 const errordata = error as any

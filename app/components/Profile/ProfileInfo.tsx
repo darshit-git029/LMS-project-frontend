@@ -58,13 +58,13 @@ const ProfileInfo: FC<Props> = ({ user, avatar }) => {
     return (
         <>
             <div className='w-full flex justify-center'>
-                <div className="relative">
+                <div className="relative z-[-1]">
                     <Image
                         src={user?.avatar ? data?.user?.image || user?.avatar.url : avatarDefault}
                         width={120}
                         height={120}
                         alt=""
-                        className="w-[100px] h-[100px] cursor-pointer border border-[#37a39a] rounded-full"
+                        className="w-[100px]  h-[100px] cursor-pointer border border-[#37a39a] rounded-full"
                     >
                     </Image>
                     <input
@@ -89,7 +89,7 @@ const ProfileInfo: FC<Props> = ({ user, avatar }) => {
                 <form onSubmit={handelSubmit}>
                     <div className="800px:w-[50%] m-auto block pb-4"  >
                         <div className="w-[100%]">
-                            <label className='block pb-2'>Full Name</label>
+                            <label className='block pb-2 text-black dark:text-white'>Full Name</label>
                             <input
                                 type='text'
                                 className={`${style.input} !w-[95%] mb-4 800px:mb-0`}
@@ -98,7 +98,7 @@ const ProfileInfo: FC<Props> = ({ user, avatar }) => {
                             />
                         </div>
                         <div className="w-[100%]">
-                            <label className='block pt-5 pb-2'>Email</label>
+                            <label className='block pt-5 pb-2 text-black dark:text-white'>Email</label>
                             <input
                                 type='text'
                                 className={`${style.input} !w-[95%] mb-4 800px:mb-0`}

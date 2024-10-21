@@ -11,6 +11,10 @@ import { format } from 'timeago.js'
 import { BiMessage } from 'react-icons/bi'
 import { VscVerifiedFilled } from 'react-icons/vsc'
 import Ratings from '@/app/utils/Ratings'
+import socketIO from "socket.io-client"
+const ENDPOINT = process.env.NEXT_PUBLIC_SOCKET_SERVER_URL || ""
+const socketId = socketIO(ENDPOINT, { transports: ["websocket"] })
+
 
 type Props = {
     data: any
@@ -29,8 +33,8 @@ const CourseContentMedia: FC<Props> = ({ data, id, activeVideo, setActiveVideo, 
     const [questionId, setQuestionId] = useState("")
     const [rating, setRating] = useState(0)
     const [reviewId, setReviewId] = useState("")
-    const [review,setReview] = useState("")
-    const [reply,setReply] = useState("")
+    const [review, setReview] = useState("")
+    const [reply, setReply] = useState("")
     const [isReviewReply, setIsReviewReply] = useState(false);
 
     const [addNewQuestion, { isSuccess, error, isLoading: answerCreationLoading }] = useAddNewQuestionMutation({})
@@ -54,10 +58,10 @@ const CourseContentMedia: FC<Props> = ({ data, id, activeVideo, setActiveVideo, 
             questionId: questionId,
         });
     };
-    const { data: courseData , refetch:courseRefetch} = useGetAllCourseUsersQuery(
+    const { data: courseData, refetch: courseRefetch } = useGetAllCourseUsersQuery(
         id,
         { refetchOnMountOrArgChange: true }
-      );
+    );
     const [addReviewInCourse, { isSuccess: reviewSuccess, error: reviewError }] = useAddReviewInCourseMutation({})
 
     const handleReviewSubmit = async () => {
@@ -69,47 +73,52 @@ const CourseContentMedia: FC<Props> = ({ data, id, activeVideo, setActiveVideo, 
     };
     const course = courseData?.course
     const isReviewExist = course?.reviews?.find(
-      (item: any) => item.user._id === user?._id
+        (item: any) => item.user._id === user?._id
     );
     console.log(course);
-    
+
     const handleReviewReplySubmit = () => {
         if (!replyCreationLoading) {
-          if (reply === "") {
-            toast.error("Reply can't be empty");
-          } else {
-            addReplyInReview({ comment: reply, courseId: id, reviewId });
-          }
+            if (reply === "") {
+                toast.error("Reply can't be empty");
+            } else {
+                addReplyInReview({ comment: reply, courseId: id, reviewId });
+            }
         }
-      };
+    };
 
     const [
         addReplyInReview,
         {
-          isSuccess: replySuccess,
-          error: replyError,
-          isLoading:replyCreationLoading
+            isSuccess: replySuccess,
+            error: replyError,
+            isLoading: replyCreationLoading
         },
-      ] = useAddReplyInReviewMutation({});
-    
-      
-      useEffect(() => {
+    ] = useAddReplyInReviewMutation({});
+
+
+    useEffect(() => {
         if (replySuccess) {
             setReply("");
             refetch();
-          }
-          if (replyError) {
+        }
+        if (replyError) {
             if ("data" in replyError) {
-              const errorMessage = error as any;
-              toast.error(errorMessage.data.message);
+                const errorMessage = error as any;
+                toast.error(errorMessage.data.message);
             }
-          }
-      },[replySuccess, replyError, error,refetch])
+        }
+    }, [replySuccess, replyError, error, refetch])
 
     useEffect(() => {
         if (isSuccess) {
             refetch()
             setQuestions("")
+            socketId.emit("notification", {
+                title: "New Question",
+                message: `You have new question from ${data[activeVideo].title}`,
+                userId: user._id
+            })
             toast.success("Question Posted successfully")
         }
 
@@ -127,6 +136,13 @@ const CourseContentMedia: FC<Props> = ({ data, id, activeVideo, setActiveVideo, 
             refetch()
             setAnswer("")
             toast.success("Answer Added successfully")
+            if (user.role !== "admin") {
+                socketId.emit("notification", {
+                    title: "New Reply",
+                    message: `You have new question reply in ${data[activeVideo].title}`,
+                    userId: user._id
+                })
+            }
         } if (answerEror) {
             if ("data" in answerEror) {
                 const errordata = error as any
@@ -137,8 +153,12 @@ const CourseContentMedia: FC<Props> = ({ data, id, activeVideo, setActiveVideo, 
 
     useEffect(() => {
         if (reviewSuccess) {
-            
             courseRefetch()
+            socketId.emit("notification", {
+                title: "New Review",
+                message: `You have new Review from ${data[activeVideo].title}`,
+                userId: user._id
+            })
             toast.success("Review Added successfully")
         } if (reviewError) {
             if ("data" in reviewError) {
@@ -201,7 +221,7 @@ const CourseContentMedia: FC<Props> = ({ data, id, activeVideo, setActiveVideo, 
 
                 {activeBar === 2 && (
                     <>
-                        <div className="flex w-full">
+                        <div className="flex w-full mt-4">
                             <Image
                                 src={
                                     user?.avatar
@@ -255,7 +275,7 @@ const CourseContentMedia: FC<Props> = ({ data, id, activeVideo, setActiveVideo, 
                 {
                     activeBar === 3 && <div className="w-full">
                         {
-                            isReviewExist && (
+                            !isReviewExist && (
                                 <><br />
                                     <div className="w-full flex">
 
@@ -337,7 +357,7 @@ const CourseContentMedia: FC<Props> = ({ data, id, activeVideo, setActiveVideo, 
                                                     </small>
                                                 </div>
                                             </div>
-                                            {user.role === "admin" &&  (
+                                            {user.role === "admin" && (
                                                 <span
                                                     className={`${style.label} !ml-10 cursor-pointer`}
                                                     onClick={() => {
@@ -368,7 +388,7 @@ const CourseContentMedia: FC<Props> = ({ data, id, activeVideo, setActiveVideo, 
                                                 </div>
                                             )}
 
-                                            { item.commentReplies &&  item?.commentReplies.map((i: any, index: number) => (
+                                            {item.commentReplies && item?.commentReplies.map((i: any, index: number) => (
                                                 <div className="w-full flex 800px:ml-16 my-5" key={index}>
                                                     <div className="w-[50px] h-[50px]">
                                                         <Image

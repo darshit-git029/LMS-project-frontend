@@ -45,7 +45,7 @@ const CourseDetails = ({ data, stripePromise, clientSecret }: Props) => {
 
   return (
     <div>
-      <div className="w-[90%] 800px:w-[90%] m-auto py-5 h-auto">
+      <div className="w-[90%] 800px:w-[90%] m-auto py-5 h-auto text-black dark:text-white">
         <div className="w-full flex flex-col-reverse 800px:flex-row">
           <div className="w-full 800px:w-[65%] 800px:pr-5">
             <h1 className="text-[25px] font-Poppins font-[600] text-black dark:text-white">
@@ -161,8 +161,8 @@ const CourseDetails = ({ data, stripePromise, clientSecret }: Props) => {
                         <p className="text-black dark:text-white">
                           {item.comment}
                         </p>
-                        <small className="text-[#000000d1] dark:text-[#ffffff83]">
-                          {format(item.createdAt)} •
+                        <small className="text-[#000000] dark:text-[#ffffff83]">
+                          {/* {format(item.createdAt)} •   */}
                         </small>
                       </div>
                       <div className="pl-2 flex 800px:hidden items-center">
@@ -193,7 +193,7 @@ const CourseDetails = ({ data, stripePromise, clientSecret }: Props) => {
                       <VscVerifiedFilled className="text-[#0095F6] ml-2 text-[20px]" />
                     </div>
                     <p>{i.comment}</p>
-                    <small className="text-[#ffffff83]">
+                    <small className="text-black dark:text-white">
                       {format(i.createdAt)} •
                     </small>
                   </div>
@@ -216,11 +216,11 @@ const CourseDetails = ({ data, stripePromise, clientSecret }: Props) => {
                         </div>
                         <div className="pl-2">
                           <div className="flex items-center">
-                            <h5 className="text-[20px]">{i.user.name || "USER NAMWE"}</h5>{" "}
-                            <VscVerifiedFilled className="text-[#0095F6] ml-2 text-[20px]" />
+                            <h5 className="text-[20px] text-black dark:text-white">{i.user.name || "USER NAMWE"}</h5>{" "}
+                            <VscVerifiedFilled className="text-[#2ea2f0] ml-2 text-[20px]" />
                           </div>
-                          <p>{i.comment}</p>
-                          <small className="text-[#ffffff83]">
+                          <p className='text-black dark:text-white'>{i.comment}</p>
+                          <small className=" text-black dark:text-white">
                             {format(i.createdAt)} •
                           </small>
                         </div>
@@ -250,14 +250,14 @@ const CourseDetails = ({ data, stripePromise, clientSecret }: Props) => {
               <div className="flex items-center">
                 {isPurchased ? (
                   <Link
-                    className={`${style.button} !w-[180px] my-3 font-Poppins cursor-pointer !bg-[crimson]`}
+                    className={`${style.button} !w-[180px] my-3 font-Poppins cursor-pointer !bg-[crimson] text-white`}
                     href={`/course-access/${data._id}`}
                   >
                     Enter to Course
                   </Link>
                 ) : (
                   <div
-                    className={`${style.button} !w-[180px] my-3 font-Poppins cursor-pointer !bg-[crimson]`}
+                    className={`${style.button} !w-[180px] my-3 font-Poppins cursor-pointer !bg-[crimson] text-white`}
                     onClick={handlerOrder}
                   >
                     Buy Now {data.price}$
@@ -295,7 +295,7 @@ const CourseDetails = ({ data, stripePromise, clientSecret }: Props) => {
               <div className="w-full">
                 {stripePromise && clientSecret && (
                   <Elements stripe={stripePromise} options={{ clientSecret }}>
-                    <CheckOutForm setOpen={setOpen} data={data} />
+                    <CheckOutForm setOpen={setOpen} data={data}  user={user}/>
                   </Elements>
                 )}
               </div>

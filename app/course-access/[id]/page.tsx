@@ -20,19 +20,19 @@ const page = ({ params }: Props) => {
     const id = params.id
     const [Route, setRoute] = useState("Login")
     const [open, setOpen] = useState(false)
-    const { isLoading, error, data } = useLoaduserQuery(undefined, {})
+    const { isLoading, error, data , refetch} = useLoaduserQuery(undefined, {refetchOnMountOrArgChange:true})
 
     useEffect(() => {
         if (data) {
             const isPurchsed = data.user.courses.find((item: any) => item._id === id)
             if (!isPurchsed) {
-                toast.error("you are purchased this course, first purchased this")
-                redirect("/")
-            }if(error){
+                refetch()
+                redirect(`/course/${id}`)
+            }if(error){ 
                 redirect("/")
             }
         }
-    }, [data,error])
+    }, [data, error, id, refetch])
 
 
 

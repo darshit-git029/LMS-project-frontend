@@ -44,24 +44,24 @@ const SidebarProfile: FC<Props> = ({ user, active, avatar, logoutHandler, setAct
                 </h2>
             </div>
             <div className={`w-full flex items-center px-3 py-4 cursor-pointer  ${active === 2 ? "dark:bg-slate-800 bg-white" : "bg-transparent"}`} onClick={() => setActive(2)}>
-                <RiLockPasswordLine size={20} fill="#fff" />
+                <RiLockPasswordLine size={20} className=" text-black dark:text-white" />
                 <h2 className='pl-2 800px:block hidden font-Poppins text-black dark:text-white'> Change Password</h2>
             </div>
             <div className={`w-full flex items-center px-3 py-4 cursor-pointer  ${active === 3 ? "dark:bg-slate-800 bg-white" : "bg-transparent"}`} onClick={() => setActive(3)}>
-                <SiCoursera size={20} fill="#fff" />
+                <SiCoursera size={20} className=" text-black dark:text-white" />
                 <h2 className='pl-2 800px:block hidden font-Poppins text-black dark:text-white'> Enrolled Course</h2>
             </div>
             {
                 user?.role === "admin" && (
                     <Link  href={'/admin'} className={`w-full flex items-center px-3 py-4 cursor-pointer  ${active === 5 ? "dark:bg-slate-800 bg-white" : "bg-transparent"}`} onClick={() => setActive(5)}>
-                        <MdOutlineAdminPanelSettings size={20} fill="#fff"/>
+                        <MdOutlineAdminPanelSettings size={20} className=" text-black dark:text-white"/>
                         <h2 className='pl-2 800px:block hidden font-Poppins text-black dark:text-white'> Admin Dashboard</h2>
                     </Link>
                 )
             }
 
             <div className={`w-full flex items-center px-3 py-4 cursor-pointer  ${active === 4 ? "dark:bg-slate-800 bg-white" : "bg-transparent"}`} onClick={() => logoutHandler()}>
-                <AiOutlineLogout size={20} fill="#fff" />
+                <AiOutlineLogout size={20} className=" text-black dark:text-white" />
                 <h2 className='pl-2 800px:block hidden font-Poppins text-black dark:text-white'>Logout</h2>
             </div>
         </div>

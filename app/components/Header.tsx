@@ -9,12 +9,12 @@ import CustomModel from "../components/CustomModel" // Fixed import
 import Login from './Auth/Login'
 import Signup from './Auth/Signup'
 import Verification from './Auth/Verification'
-import { useSelector } from 'react-redux'
 import Image from 'next/image'
-import avatarDefault from "../../../client/assect/client-1.jpg"
+import avatarDefault from "../../assect/client-1.jpg"       
 import { useSession } from 'next-auth/react'
 import { useLogoutQuery, useSocialAuthMutation } from '@/redux/features/auth/authapi'
 import toast from 'react-hot-toast'
+import { useLoaduserQuery } from '@/redux/features/apiSlice'
 
 type Props = {
     open: boolean;
@@ -28,7 +28,7 @@ const Header: FC<Props> = ({ activeItem, setOpen, Route, open, setRoute }) => {
 
     const [active, setActive] = useState(false)
     const [opensidebar, setOpensidebar] = useState(false)
-    const { user } = useSelector((state: any) => state.auth)
+    const {data : userData,isLoading,refetch} = useLoaduserQuery(undefined,{})
     const [socialAuth, { isSuccess, error }] = useSocialAuthMutation()
     const { data } = useSession()
     const [logout, setLogout] = useState(false)
@@ -37,9 +37,12 @@ const Header: FC<Props> = ({ activeItem, setOpen, Route, open, setRoute }) => {
         skip: !logout ? true : false
     })
     useEffect(() => {
-        if (!user) {
-            if (data) {
-                socialAuth({ email: data?.user?.email, name: data?.user?.name, avatar: data?.user?.image })
+        if (!isLoading) {
+            if (!userData) {
+                if(data){
+
+                    socialAuth({ email: data?.user?.email, name: data?.user?.name, avatar: data?.user?.image })
+                }
             }
         }
         else if (data === null)
@@ -49,11 +52,11 @@ const Header: FC<Props> = ({ activeItem, setOpen, Route, open, setRoute }) => {
                 toast.error("Login failed")
             }
 
-        if (data === null) {
+        if (data === null && !isLoading && !userData) {
             setLogout(true)
         }
 
-    }, [data, user, socialAuth, isSuccess, error])
+    }, [data, socialAuth, isSuccess, error,isLoading,userData])
 
 
 
@@ -128,14 +131,14 @@ const Header: FC<Props> = ({ activeItem, setOpen, Route, open, setRoute }) => {
                                 />
                             </div>
                             {
-                                user ? (
+                                userData ? (
                                     <Link href={"/profile"}>
                                         <Image
-                                            src={user?.avatar ? data?.user?.image || user?.avatar.url : avatarDefault}
+                                            src={userData?.user.avatar ? data?.user?.image || userData?.user.avatar.url : avatarDefault}
                                             width={120}
                                             height={120}
                                             alt=''
-                                            className='rounded-full w-[30px] h-[30px] cursor-pointer'
+                                            className='rounded-full ml-3 w-[30px] h-[30px] cursor-pointer'
                                             style={{ border: activeItem === 5 ? "2px solid #ffc107" : "none" }}
 
                                         />
@@ -155,15 +158,32 @@ const Header: FC<Props> = ({ activeItem, setOpen, Route, open, setRoute }) => {
                 {/* mobile sidebar */}
                 {
                     opensidebar && (
-                        <div className="fixed w-full h-screen top-0 left-0 z[99990] dark:bg-[unset] bg-[#00000024]" onClick={handleClose} id="screen">
+                        <div className="fixed w-full h-screen top-0 left-0 z[999999999] dark:bg-[unset] bg-[#00000024]" onClick={handleClose} id="screen">
 
                             <div className="w-[70%] fixed z-[999999999] h-screen bg-white dark:bg-slate-950 dark:bg-opacity-90 top-0 right-0">
                                 <Navitem activeItem={activeItem} isMobile={true} />
-                                <HiOutlineUserCircle
-                                    className='cursor-pointer ml-5 my-2 dark:text-white text-black'
-                                    size={25}
-                                    onClick={() => setOpen(true)}
-                                />
+                                {
+                                userData ? (
+                                    <Link href={"/profile"}>
+                                        <Image
+                                            src={userData?.user.avatar ? data?.user?.image || userData?.user.avatar.url : avatarDefault}
+                                            width={120}
+                                            height={120}
+                                            alt=''
+                                            className='rounded-full ml-6 w-[30px] h-[30px] cursor-pointer'
+                                            style={{ border: activeItem === 5 ? "2px solid #ffc107" : "none" }}
+
+                                        />
+                                    </Link>
+                                ) : (
+                                    <HiOutlineUserCircle
+                                        className='hidden 800px:block cursor-pointer dark:text-white text-black'
+                                        size={25}
+                                        onClick={(e) => (e.preventDefault(), setOpen(true))}
+
+                                    />
+                                )
+                            }
                                 <br />
                                 <br />
                                 <p className='ml-5'>
@@ -185,6 +205,7 @@ const Header: FC<Props> = ({ activeItem, setOpen, Route, open, setRoute }) => {
                                 setRoute={setRoute}
                                 activeItem={activeItem}
                                 component={Login}
+                                refetch={refetch}
                             />
                         )
                     }
