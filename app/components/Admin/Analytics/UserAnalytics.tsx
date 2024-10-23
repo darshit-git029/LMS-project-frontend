@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
+"use cilent"
 import { style} from "../../../style";
 
 import React, { FC } from "react";

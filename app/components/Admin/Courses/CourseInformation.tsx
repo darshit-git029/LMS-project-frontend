@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-empty-object-type */
 /* eslint-disable @typescript-eslint/no-unused-vars */
+"use client"
 import { style } from '@/app/style'
 import { useGetHeroDataQuery } from '@/redux/Layout/layoutApi'
 import React, { FC, useEffect, useState } from 'react'

@@ -1,3 +1,5 @@
+"use client"
+
 import { useGetAllCourseUsersQuery } from '../../../redux/features/courses/courseApi'
 import React, { useEffect, useState } from 'react'
 import Loader from '../Loaders/Loader'

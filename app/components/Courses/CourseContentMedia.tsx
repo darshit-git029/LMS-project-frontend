@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-key */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+"use client"
 import React, { FC, useEffect, useState } from 'react'
 import CoursePlayer from '../Admin/Courses/CoursePlayer'
 import { style } from '@/app/style'
@@ -179,7 +180,7 @@ const CourseContentMedia: FC<Props> = ({ data, id, activeVideo, setActiveVideo, 
                         <AiOutlineArrowLeft className='mr-2' />
                         Prew Lesson
                     </div>
-                    <div className={`${style.button} !w-[unset] !min-h-[40px] !py-[unset] items-center ${activeVideo === 0 && "!cursor-no-drop opacity-[.8] "} `} onClick={() => setActiveVideo(activeVideo === 0 ? 0 : activeVideo + 1)}>
+                    <div className={`${style.button} !w-[unset] !min-h-[40px] !py-[unset] items-center ${activeVideo === 1 && "!cursor-no-drop opacity-[.8] "} `} onClick={() => setActiveVideo(activeVideo === 1 ? 1 : activeVideo + 1)}>
                         <AiOutlineArrowRight className='mr-2' />
                         next Lesson
                     </div>
@@ -190,7 +191,7 @@ const CourseContentMedia: FC<Props> = ({ data, id, activeVideo, setActiveVideo, 
                 <div className="w-full flex items-center justify-between p-4  bg-slate-500 bg-opacity-20 backdrop-blur shadow-[bg-slate-700] rounded shadow-inner ">
                     {
                         ["Overview", "Resource", "Q&A", "Review"].map((item: any, index: number) => (
-                            <h5 key={index} className={`800px:text-[20px] cursor-pointer text-black dark:text-white ${activeBar === index && "text-red-500 dark:text-red-500"}`} onClick={() => setActiveBar(index)}>
+                            <h5 key={index} className={`800px:text-[20px] cursor-pointer text-black dark:text-white ${activeBar === index && "!text-red-500"}`} onClick={() => setActiveBar(index)}>
                                 {item}
                             </h5>
                         ))
@@ -207,18 +208,27 @@ const CourseContentMedia: FC<Props> = ({ data, id, activeVideo, setActiveVideo, 
                         </p>
                     </div>
                 }
-                {
-                    activeBar === 1 && <div className="w-full">
-                        <br />
-                        <h1 className="text-[25px] font-Poppins font-[600] text-black dark:text-white">
-                            Course Details
-                        </h1>
-                        <p className="text-[18px] mt-[20px] whitespace-pre-line w-full overflow-hidden text-black dark:text-white">
-                            {data?.[activeVideo]?.description}
-                        </p>
+                {activeBar === 1 && (
+                    <div>
+                        {data[activeVideo]?.links.map((item: any, index: number) => (
+                            <div className="mb-5" key={index}>
+                                <br />
+                                <h1 className="text-[25px] font-Poppins font-[600] text-black dark:text-white">
+                                    Course Links
+                                </h1><br/>
+                                 <h2 className="800px:text-[20px] 800px:inline-block dark:text-white text-black">
+                                    {item.title && item.title + " :"}
+                                </h2>
+                                <a
+                                    className="inline-block text-[#4395c4] 800px:text-[20px] 800px:pl-2"
+                                    href={item.url}
+                                >
+                                    {item.url}
+                                </a>
+                            </div>
+                        ))}
                     </div>
-                }
-
+                )}
                 {activeBar === 2 && (
                     <>
                         <div className="flex w-full mt-4">
@@ -353,7 +363,7 @@ const CourseContentMedia: FC<Props> = ({ data, id, activeVideo, setActiveVideo, 
                                                     <Ratings rating={item.rating} />
                                                     <p>{item.comment}</p>
                                                     <small className="text-[#0000009e] dark:text-[#ffffff83]">
-                                                        {format(item.createdAt)} •
+                                                        {/* {format(item.createdAt)} • */}
                                                     </small>
                                                 </div>
                                             </div>

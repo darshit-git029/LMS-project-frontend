@@ -27,7 +27,7 @@ const CourseContent = ({ id,user }: Props) => {
       <div className="col-span-7">
         <CourseContentMedia data={data} id={id} activeVideo={activeVideo} setActiveVideo={setActiveVideo} user={user} refetch={refetch}/>
       </div>
-      <div className="hidden 800px:block 800px:col-span-3">
+      <div className="hidden 800px:block 800px:col-span-3 ">
         <CourseContentList data={data} setActiveVideo={setActiveVideo} activeVideo={activeVideo} />
       </div>
     </div>

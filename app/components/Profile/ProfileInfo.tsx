@@ -11,9 +11,10 @@ import { useSession } from 'next-auth/react'
 type Props = {
     avatar: string | null
     user: any
+    refetch:any
 }
 
-const ProfileInfo: FC<Props> = ({ user, avatar }) => {
+const ProfileInfo: FC<Props> = ({ user, avatar ,refetch}) => {
 
     const [name, setName] = useState(user && user.name)
     const [updateAvatar, { isSuccess, error }] = useUpdateAvatarMutation()
@@ -38,11 +39,12 @@ const ProfileInfo: FC<Props> = ({ user, avatar }) => {
     useEffect(() => {
         if(isSuccess || success){
             toast.success("Profile updated Successfully")
+            refetch()
             setLoaduser(true)
         }if(error || errors){
             toast.error("could not update profile picture")
         }
-    },[isSuccess,error,success,errors])
+    },[isSuccess,error,success,errors,refetch])
 
     const handelSubmit =  async (e:any) => {
         e.preventDefault()
@@ -58,10 +60,10 @@ const ProfileInfo: FC<Props> = ({ user, avatar }) => {
     return (
         <>
             <div className='w-full flex justify-center'>
-                <div className="relative z-[-1]">
+                <div className="relative z-[1]">
                     <Image
-                        src={user?.avatar ? data?.user?.image || user?.avatar.url : avatarDefault}
-                        width={120}
+            src={user.avatar || avatar ? user.avatar.url : avatarDefault}
+            width={120}
                         height={120}
                         alt=""
                         className="w-[100px]  h-[100px] cursor-pointer border border-[#37a39a] rounded-full"
@@ -78,7 +80,7 @@ const ProfileInfo: FC<Props> = ({ user, avatar }) => {
                     </input>
                     <label htmlFor='avatar'>
                         <div className="w-[30px] h-[30px] bg-slate-900 rounded-full absolute bottom-2 right-2 flex items-center justify-center cursor-pointer">
-                            <AiOutlineCamera size={20} className='z-1' />
+                            <AiOutlineCamera size={20} className='z-[0]' />
                         </div>
                     </label>
                 </div>

@@ -6,10 +6,8 @@ import React, { FC, useEffect, useState } from 'react'
 import SidebarProfile from './SidebarProfile'
 import { useLogoutQuery } from '@/redux/features/auth/authapi'
 import { signOut } from 'next-auth/react'
-import { redirect } from 'next/navigation'
 import ProfileInfo from './ProfileInfo'
 import Changepassword from './Changepassword'
-import Footer from '@/app/Footer/Footer'
 import CourseCard from '../Courses/CaourseCard'
 import { useGetAlluserCourseQuery } from '@/redux/features/courses/courseApi'
 
@@ -19,7 +17,7 @@ type Props = {
 
 const Profile: FC<Props> = ({ user }) => {
 
-    const {data,isLoading} = useGetAlluserCourseQuery(undefined,{})
+    const {data,isLoading,refetch} = useGetAlluserCourseQuery(undefined,{refetchOnMountOrArgChange:true})
 
     const [scroll, setScroll] = useState(false)
     const [active, setActive] = useState(1)
@@ -55,12 +53,13 @@ const Profile: FC<Props> = ({ user }) => {
                     avatar={avatar}
                     setActive={setActive}
                     logoutHandler={logoutHandler}
+                    refetch={refetch}
                 />
             </div>
             {
                 active === 1 && (
                     <div className="w-full h-full bg-transparent mt-[80px]">
-                        <ProfileInfo avatar={avatar} user={user} />
+                        <ProfileInfo avatar={avatar} user={user} refetch={refetch}/>
                     </div>
                 )
             }

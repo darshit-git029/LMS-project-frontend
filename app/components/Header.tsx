@@ -99,11 +99,11 @@ const Header: FC<Props> = ({ activeItem, setOpen, Route, open, setRoute }) => {
 
 
     return (
-        <div className="w-full relative">
+        <div className="w-full relative z-[99]">
             <div
                 className={`${active
-                    ? "dark:bg-opacity-50 bg-white dark:bg-gradient-to-b dark:from-gray-900 dark:to-black fixed top-0 left-0 w-full h-[80px] z-[80] border-b dark:border-[#ffffff1c] shadow-xl transition duration-500"
-                    : "w-full border-b dark:border-[#ffffff1c] h-[80px] z-[80] dark:shadow"
+                    ? "dark:bg-opacity-50 bg-white dark:bg-gradient-to-b dark:from-gray-900 dark:to-black fixed top-0 left-0 w-full h-[80px] z-[99  ] border-b dark:border-[#ffffff1c] shadow-xl transition duration-500"
+                    : "w-full border-b dark:border-[#ffffff1c] h-[80px] z-[99] dark:shadow"
                     }`}
             >
                 <div className="w-[95%] 800px:w-[92%] m-auto py-2 h-full">
@@ -145,7 +145,7 @@ const Header: FC<Props> = ({ activeItem, setOpen, Route, open, setRoute }) => {
                                     </Link>
                                 ) : (
                                     <HiOutlineUserCircle
-                                        className='hidden 800px:block cursor-pointer dark:text-white text-black'
+                                        className=' 800px:block cursor-pointer dark:text-white text-black'
                                         size={25}
                                         onClick={(e) => (e.preventDefault(), setOpen(true))}
 
@@ -158,7 +158,7 @@ const Header: FC<Props> = ({ activeItem, setOpen, Route, open, setRoute }) => {
                 {/* mobile sidebar */}
                 {
                     opensidebar && (
-                        <div className="fixed w-full h-screen top-0 left-0 z[999999999] dark:bg-[unset] bg-[#00000024]" onClick={handleClose} id="screen">
+                        <div className="fixed w-full h-screen top-0 left-0 z-[99] dark:bg-[unset] bg-[#00000024]" onClick={handleClose} id="screen">
 
                             <div className="w-[70%] fixed z-[999999999] h-screen bg-white dark:bg-slate-950 dark:bg-opacity-90 top-0 right-0">
                                 <Navitem activeItem={activeItem} isMobile={true} />
@@ -177,7 +177,7 @@ const Header: FC<Props> = ({ activeItem, setOpen, Route, open, setRoute }) => {
                                     </Link>
                                 ) : (
                                     <HiOutlineUserCircle
-                                        className='hidden 800px:block cursor-pointer dark:text-white text-black'
+                                        className=' 800px:block cursor-pointer dark:text-white text-black'
                                         size={25}
                                         onClick={(e) => (e.preventDefault(), setOpen(true))}
 

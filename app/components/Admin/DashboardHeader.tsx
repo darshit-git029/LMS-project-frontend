@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+"use client"
 import ThemeSwitcher from '@/app/utils/ThemeSwitcher'
 import { useGetAllNotificationQuery, useUpdateNotificationstatusMutation } from '@/redux/features/notification/notificationApi'
 import React, { useEffect, useState } from 'react'

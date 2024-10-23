@@ -5,13 +5,11 @@ import { useGetHeroDataQuery } from '@/redux/Layout/layoutApi'
 import { useSearchParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import Footer from '../Footer/Footer'
-import CourseCard from '../components/Courses/CaourseCard'
 import CaourseCard from '../components/Courses/CaourseCard'
 import Header from '../components/Header'
 import Loader from '../components/Loaders/Loader'
 import Heading from '../utils/Heading'
-import Page from '../page'
-import { style } from '../style'
+import { style } from '@/app/style'
 
 type Props = {}
 
@@ -27,9 +25,11 @@ const page = (props: Props) => {
     const {data:categoiresData}  = useGetHeroDataQuery(LAYOUT.CATEGORIES,{})
     const [Route,setRoute] = useState("Login")
     const [open,setOpen] = useState(false)
-    const [courses,setCourses] = useState([])
+    const [course,setCourses] = useState([])
     const [category,setCategory] = useState("All")
-
+    console.log(categoiresData);
+    console.log(data);
+    
     useEffect(() => {
         if(category === "All"){
             setCourses(data?.course)
@@ -37,11 +37,11 @@ const page = (props: Props) => {
             setCourses(data?.course.filter((item:any) => item.category === category))
         }
         if(search){
-            setCourses(data?.course.filter((item:any) => item.name.toLowerCase().included(search.toLowerCase())))
+            setCourses(data?.course.filter((item:any) => item.name.toLowerCase().includes(search.toLowerCase())))
         }
     },[data,search,category])
-
- const categories = categoiresData?.getLayout?.category;
+    console.log(search)
+ const categories = categoiresData?.getLayout[0]?.category;
     console.log(categories);
     
   return (
@@ -92,7 +92,7 @@ const page = (props: Props) => {
                 ))}
             </div>
             {
-                courses && courses.length === 0 && (
+                course && course.length === 0 && (
                     <p className={`${style.label} justify-center min-h-[50vh] flex items-center`}>
                     {search ? "No courses found!" : "No courses found in this category. Please try another one!"}
                   </p>
@@ -101,9 +101,9 @@ const page = (props: Props) => {
             <br />
             <br />
             <div className="grid grid-cols-1 gap-[20px] md:grid-cols-2 md:gap-[25px] lg:grid-cols-3 lg:gap-[25px] 1500px:grid-cols-4 1500px:gap-[35px] mb-12 border-0">
-              {courses &&
-                courses.map((item: any, index: number) => (
-                  <CaourseCard item={item} key={index} isProfile={false} />
+              {course &&
+                course.map((item: any, index: number) => (
+                  <CaourseCard item={item} key={index} isProfile={false}/>
                 ))}
             </div>
           </div>
@@ -114,4 +114,4 @@ const page = (props: Props) => {
   );
 };
 
-export default Page;
+export default page;

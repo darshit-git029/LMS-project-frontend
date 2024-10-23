@@ -9,7 +9,7 @@ export const navItemData = [
     },
     {
         name: "Course",
-        url: "/course"
+        url: "/search-course"
     }, {
         name: "About",
         url: "/about"

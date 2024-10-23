@@ -58,7 +58,7 @@ const Login: FC<Props> = ({setRoute,setOpen,refetch}) => {
 
     return (
                 
-        <div className='w-full p-2'>
+        <div className='w-full 320px:!p-[80px]  p-[6    0px]'>
             <h1 className={`${style.title}`}>
                 Login with Elearning
             </h1>

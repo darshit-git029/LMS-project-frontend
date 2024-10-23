@@ -44,6 +44,8 @@ const CourseDetails = ({ data, stripePromise, clientSecret }: Props) => {
   }
 
   return (
+    <>
+
     <div>
       <div className="w-[90%] 800px:w-[90%] m-auto py-5 h-auto text-black dark:text-white">
         <div className="w-full flex flex-col-reverse 800px:flex-row">
@@ -53,7 +55,7 @@ const CourseDetails = ({ data, stripePromise, clientSecret }: Props) => {
             </h1>
             <div className="flex items-center justify-between pt-3">
               <div className="flex items-center">
-                <Ratings rating={data.ratings} />
+                <Ratings rating={data.rating} />
                 <h5 className="text-black dark:text-white">
                   {data.reviews?.length} Reviews
                 </h5>
@@ -283,7 +285,7 @@ const CourseDetails = ({ data, stripePromise, clientSecret }: Props) => {
       </div>
       <>
         {open && (
-          <div className="w-full h-screen bg-[#00000036] fixed top-0 left-0 z-50 flex items-center justify-center">
+          <div className="w-full h-screen bg-[#00000036] fixed top-0 left-0 z-[9999999999999999] flex items-center justify-center">
             <div className="w-[500px] min-h-[500px] bg-white rounded-xl shadow p-3">
               <div className="w-full flex justify-end">
                 <IoCloseOutline
@@ -304,6 +306,7 @@ const CourseDetails = ({ data, stripePromise, clientSecret }: Props) => {
         )}
       </>
     </div>
+    </>
   )
 }
 

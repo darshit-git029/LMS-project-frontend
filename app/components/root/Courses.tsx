@@ -1,4 +1,6 @@
 /* eslint-disable react/jsx-no-undef */
+"use client"
+
 import { useGetAlluserCourseQuery } from '@/redux/features/courses/courseApi'
 import React, { useEffect, useState } from 'react'
 import CourseCard from '../Courses/CaourseCard'
@@ -17,8 +19,8 @@ function Courses({ }: Props) {
         
     return (
         <div className='w-[90%] 800px:w-[80%] m-auto'>
-            <h1 className='text-center font-Poppins text-[25px] leading-[35xp] sm:text-3xl lg:text-4xl dark:text-white text-black 800px:leading-[60px]'>
-                Expand Your Career <span className='text-gradient'>Opportunity</span><br />
+            <h1 className='text-center mt-10 font-Poppins text-[25px] leading-[35xp] sm:text-3xl lg:text-4xl dark:text-white text-black 800px:leading-[60px]'>
+                Expand Your Career <span  className="bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-transparent bg-clip-text">Opportunity</span><br />
                 Opportunity With Our Courses
             </h1>
             <br />

@@ -40,7 +40,7 @@ const Faq = (props: Props) => {
                         <Loader />
                     ) : (
                         <div className="w-[90%] 800px:w-[80%] m-auto mt-[120px]">
-                            <h1 className={`${style.title} 800px:text-[40px]`}>Ferquently Asked Question</h1>
+                            <h1 className={`${style.title} 800px:text-[40px]`}>Ferquently Asked <span className="bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 text-transparent bg-clip-text">Question</span> </h1>
                             <div className="mt-12">
                                 <dl className="space-y-8">
                                     {questions?.map((q: any) => (

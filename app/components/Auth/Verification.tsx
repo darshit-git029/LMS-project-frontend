@@ -1,3 +1,5 @@
+"use client"
+
 import { style } from '@/app/style';
 import { useActivationMutation } from '@/redux/features/auth/authapi';
 import React, { FC, useEffect, useRef, useState } from 'react';

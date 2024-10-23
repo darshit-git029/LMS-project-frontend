@@ -18,16 +18,17 @@ type Props = {
     avatar: string | null
     setActive: (active: number) => void
     logoutHandler: any
+    refetch?:any
 }
 
-const SidebarProfile: FC<Props> = ({ user, active, avatar, logoutHandler, setActive }) => {
+const SidebarProfile: FC<Props> = ({ user, active, avatar, logoutHandler, setActive,refetch }) => {
     const { data } = useSession()
     const [loaduser, setLoaduser] = useState(false)
 
     useEffect(() => {
         setLoaduser(true)
-    }, [setLoaduser])
-
+    }, [setLoaduser,refetch])
+    
     return (
         <div className='w-full'>
             <div className={`w-full flex items-center px-3 py-4 cursor-pointer  ${active === 1 ? "dark:bg-slate-800 bg-white" : "bg-transparent"}`} onClick={() => setActive(1)}>

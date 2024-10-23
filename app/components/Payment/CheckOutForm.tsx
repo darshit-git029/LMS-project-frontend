@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+"use cilent"
 import { style } from '@/app/style'
 import { useLoaduserQuery } from '@/redux/features/apiSlice'
 import { useCreateOrderMutation, useGetPaymentMutation } from '@/redux/features/order/orderApi'
@@ -78,7 +79,7 @@ const CheckOutForm = ({ setOpen, data ,user}: Props) => {
                 </span>
             </button>
             {/* Show any error or success messages */}
-            {message && <div id="payment-message" className='text-red-500 mt-3 font-Poppins text-sm'>*{message}</div>}
+            {message && <div id="payment-message" className='text-red-500 mt-[5px] font-Poppins text-sm'>*{message}</div>}
         </form>
     )
 }

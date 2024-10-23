@@ -22,21 +22,23 @@ const EditCategories = (props: Props) => {
 
     useEffect(() => {
         if (data && data.getLayout.length > 0) {
-            setCategories(data.getLayout[0]?.category || []);
+            setCategories
+            (data.getLayout[0]?.category || []);
         }
         if (layoutSuccess) {
-            refetch();
             toast.success("Categories updated successfully");
         }
         if (error && "data" in error) {
             const errorData = error as any;
             toast.error(errorData?.data?.message);
         }
-    }, [data, layoutSuccess, error, refetch]);
+    }, [data, layoutSuccess, error, refetch, editLayout]);
 
     const handleCategoriesAdd = (id: string, value: string) => {
-        setCategories(prevCategories =>
-            prevCategories.map((cat:any) => (cat._id === id ? { ...cat, title: value } : cat))
+        console.log("Add category title");
+        
+        setCategories(categories =>
+            categories.map((cat) => (cat._id === id ? { ...cat, title: value } : cat))
         );
     };
 
@@ -57,7 +59,7 @@ const EditCategories = (props: Props) => {
     };
 
     const editCategoriesHandler = async () => {
-        if (!areCategoriesUnchanged(data.getLayout[0].category, categories) && 
+        if (!areCategoriesUnchanged(data.getLayout?.category, categories) && 
             !isAnyCategoryTitleEmpty(categories)) {
             await editLayout({
                 type: "Categories",
