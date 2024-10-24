@@ -10,7 +10,7 @@ import Login from './Auth/Login'
 import Signup from './Auth/Signup'
 import Verification from './Auth/Verification'
 import Image from 'next/image'
-import avatarDefault from "../../assect/client-1.jpg"       
+import avatarDefault from "../../assect/Dumy-profile.jpeg"       
 import { useSession } from 'next-auth/react'
 import { useLogoutQuery, useSocialAuthMutation } from '@/redux/features/auth/authapi'
 import toast from 'react-hot-toast'

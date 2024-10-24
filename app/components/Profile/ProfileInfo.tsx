@@ -1,7 +1,7 @@
 'use client'
 import Image from 'next/image'
 import React, { FC, useEffect, useState } from 'react'
-import avatarDefault from "../../../assect/client-1.jpg"
+import avatarDefault from "../../../assect/Dumy-profile.jpeg"
 import { AiOutlineCamera } from 'react-icons/ai'
 import { style } from '@/app/style'
 import { useEditProfileMutation, useUpdateAvatarMutation } from '@/redux/features/user/userAPI'

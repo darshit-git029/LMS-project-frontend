@@ -4,7 +4,7 @@
 
 import Image from 'next/image'
 import React, { FC, useEffect, useState, } from 'react'
-import avatarDefault from "../../../assect/client-1.jpg"
+import avatarDefault from "../../../assect/Dumy-profile.jpeg"
 import { RiLockPasswordLine } from 'react-icons/ri'
 import { AiOutlineLogout } from 'react-icons/ai'
 import { SiCoursera } from 'react-icons/si'
