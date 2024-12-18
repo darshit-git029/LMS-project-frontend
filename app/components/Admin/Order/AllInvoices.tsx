@@ -19,7 +19,7 @@ const AllInvoices: FC<Props> = ({ isDashboard }) => {
     const { isLoading, data } = useGetAllOrderQuery({});
     const { data: usersData } = useGetAllUserQuery({});
     const { data: coursesData } = useGetAllCourseQuery({});
-  
+
     const [orderData, setOrderData] = useState<any>([]);
 
     useEffect(() => {
@@ -57,13 +57,13 @@ const AllInvoices: FC<Props> = ({ isDashboard }) => {
                     headerName: "Email-icon",
                     flex: 0.2,
                     renderCell: (params: any) => (
-                    
-                            <div className="flex justify-center items-center w-full h-full">
-                                <a href={`mailto:${params.row.email}`}>
-                                    <AiOutlineMail className="dark:text-white text-black" size={20} />
-                                </a>
-                            </div>
-                    
+
+                        <div className="flex justify-center items-center w-full h-full">
+                            <a href={`mailto:${params.row.email}`}>
+                                <AiOutlineMail className="dark:text-white text-black" size={20} />
+                            </a>
+                        </div>
+
                     ),
                 },
             ]),

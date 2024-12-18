@@ -13,7 +13,7 @@ const ReviewCard = ({ item }: Props) => {
     <>
 
       {
-        item.reviews.length !== 0  && (
+        item.reviews.length !== 0 && (
           <div className="w-full dark:bg-slate-500 dark:opacity-0.20 border dark:border-[#ffffff1d] border-[#00000015] dark:shadow-[bg-slate-700] rounded-lg p-3 shadow-sm dark:shadow-inner">
             <div className="flex w-full">
               <Image

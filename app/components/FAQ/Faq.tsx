@@ -54,10 +54,10 @@ const Faq = (props: Props) => {
                                                     className="flex items-start dark:text-white text-black justify-between w-full text-left focus:outline-none"
                                                     onClick={() => toggleQuestion(q._id)}
                                                 >
-                                                     <dd className="mt-2 pr-12">
-                                                    <p className='text-base font-Poppins dark:text-white text-black'>Q. {q.question}</p>
-                                                    
-                                                </dd>
+                                                    <dd className="mt-2 pr-12">
+                                                        <p className='text-base font-Poppins dark:text-white text-black'>Q. {q.question}</p>
+
+                                                    </dd>
 
                                                     <span className="ml-6 flex-shrink-0">
                                                         {activeQuestion === q._id ? (
@@ -71,9 +71,9 @@ const Faq = (props: Props) => {
                                             {activeQuestion === q._id && (
                                                 <dd className="mt-4 pr-12">
                                                     <p className='text-base font-Poppins dark:text-white text-black'>ANS: {q.answer}</p>
-                                                    
+
                                                 </dd>
-                                            )}            
+                                            )}
                                         </div>
                                     ))}
                                 </dl>

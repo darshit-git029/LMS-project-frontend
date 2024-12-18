@@ -16,26 +16,28 @@ type Props = {
 const page = (props: Props) => {
 
     const [open, setOpen] = useState(false)
-    const [activeItem, setActveitem] = useState(2)  
+    const [activeItem, setActveitem] = useState(2)
     const [Route, setRoute] = useState("Login")
 
     return (
-        <div>
-            <Heading
-                title="about-us E-learing"
-                description="E-learing is a paltfrom for student to learn and get help form teachers"
-                keyWord="Programming,MERN,Database"
-            />
-            <Header
-                open={open}
-                setOpen={setOpen}
-                activeItem={activeItem}
-                setRoute={setRoute}
-                Route={Route}
-            />
-            <About />
-            <Footer />
-        </div>
+        <>
+            <div>
+                <Heading
+                    title="about-us E-learing"
+                    description="E-learing is a paltfrom for student to learn and get help form teachers"
+                    keyWord="Programming,MERN,Database"
+                />
+                <Header
+                    open={open}
+                    setOpen={setOpen}
+                    activeItem={activeItem}
+                    setRoute={setRoute}
+                    Route={Route}
+                />
+                <About />
+                <Footer />
+            </div>
+        </>
     )
 }
 

@@ -10,7 +10,7 @@ import Login from './Auth/Login'
 import Signup from './Auth/Signup'
 import Verification from './Auth/Verification'
 import Image from 'next/image'
-import avatarDefault from "../../assect/Dumy-profile.jpeg"       
+import avatarDefault from "../../assect/Dumy-profile.jpeg"
 import { useSession } from 'next-auth/react'
 import { useLogoutQuery, useSocialAuthMutation } from '@/redux/features/auth/authapi'
 import toast from 'react-hot-toast'
@@ -28,7 +28,7 @@ const Header: FC<Props> = ({ activeItem, setOpen, Route, open, setRoute }) => {
 
     const [active, setActive] = useState(false)
     const [opensidebar, setOpensidebar] = useState(false)
-    const {data : userData,isLoading,refetch} = useLoaduserQuery(undefined,{})
+    const { data: userData, isLoading, refetch } = useLoaduserQuery(undefined, {})
     const [socialAuth, { isSuccess, error }] = useSocialAuthMutation()
     const { data } = useSession()
     const [logout, setLogout] = useState(false)
@@ -39,7 +39,7 @@ const Header: FC<Props> = ({ activeItem, setOpen, Route, open, setRoute }) => {
     useEffect(() => {
         if (!isLoading) {
             if (!userData) {
-                if(data){
+                if (data) {
 
                     socialAuth({ email: data?.user?.email, name: data?.user?.name, avatar: data?.user?.image })
                 }
@@ -56,7 +56,7 @@ const Header: FC<Props> = ({ activeItem, setOpen, Route, open, setRoute }) => {
             setLogout(true)
         }
 
-    }, [data, socialAuth, isSuccess, error,isLoading,userData])
+    }, [data, socialAuth, isSuccess, error, isLoading, userData])
 
 
 
@@ -163,27 +163,27 @@ const Header: FC<Props> = ({ activeItem, setOpen, Route, open, setRoute }) => {
                             <div className="w-[70%] fixed z-[999999999] h-screen bg-white dark:bg-slate-950 dark:bg-opacity-90 top-0 right-0">
                                 <Navitem activeItem={activeItem} isMobile={true} />
                                 {
-                                userData ? (
-                                    <Link href={"/profile"}>
-                                        <Image
-                                            src={userData?.user.avatar ? data?.user?.image || userData?.user.avatar.url : avatarDefault}
-                                            width={120}
-                                            height={120}
-                                            alt=''
-                                            className='rounded-full ml-6 w-[30px] h-[30px] cursor-pointer'
-                                            style={{ border: activeItem === 5 ? "2px solid #ffc107" : "none" }}
+                                    userData ? (
+                                        <Link href={"/profile"}>
+                                            <Image
+                                                src={userData?.user.avatar ? data?.user?.image || userData?.user.avatar.url : avatarDefault}
+                                                width={120}
+                                                height={120}
+                                                alt=''
+                                                className='rounded-full ml-6 w-[30px] h-[30px] cursor-pointer'
+                                                style={{ border: activeItem === 5 ? "2px solid #ffc107" : "none" }}
+
+                                            />
+                                        </Link>
+                                    ) : (
+                                        <HiOutlineUserCircle
+                                            className=' 800px:block cursor-pointer dark:text-white text-black'
+                                            size={25}
+                                            onClick={(e) => (e.preventDefault(), setOpen(true))}
 
                                         />
-                                    </Link>
-                                ) : (
-                                    <HiOutlineUserCircle
-                                        className=' 800px:block cursor-pointer dark:text-white text-black'
-                                        size={25}
-                                        onClick={(e) => (e.preventDefault(), setOpen(true))}
-
-                                    />
-                                )
-                            }
+                                    )
+                                }
                                 <br />
                                 <br />
                                 <p className='ml-5'>

@@ -15,13 +15,13 @@ import { style } from '../../../../app/style'
 
 
 type Props = {
-    isTeam : boolean
+    isTeam: boolean
 }
 
-const Allcourses:FC<Props> = ({isTeam}) => {
+const Allcourses: FC<Props> = ({ isTeam }) => {
 
-    const {theme, setTheme} = useTheme()
-    const [active,setActive] = useState(false)
+    const { theme, setTheme } = useTheme()
+    const [active, setActive] = useState(false)
     const { isLoading, data, error } = useGetAllUserQuery({})
     const columns = [
         { field: "id", headerName: "ID", flex: 0.5 },
@@ -51,7 +51,7 @@ const Allcourses:FC<Props> = ({isTeam}) => {
                     <>
                         <Button>
                             <a href={`mailto:${params.row.email}`}>
-                            <AiOutlineMail size={20} className='dark:text-white text-black' />
+                                <AiOutlineMail size={20} className='dark:text-white text-black' />
                             </a>
                         </Button>
                     </>
@@ -62,25 +62,25 @@ const Allcourses:FC<Props> = ({isTeam}) => {
 
     const rows: any = []
 
-    if(isTeam){
-        const newData =data && data.user.filter((item:any) => item.role === "admin")
+    if (isTeam) {
+        const newData = data && data.user.filter((item: any) => item.role === "admin")
         newData && newData.forEach((item: any) => {
             rows.push({
                 id: item._id,
                 name: item.name,
                 email: item.email,
-                role:item.role,
+                role: item.role,
                 courses: item.courses.length,
                 createdAt: format(item.createdAt)
             })
         })
-    }else{
+    } else {
         data && data.user.forEach((item: any) => {
             rows.push({
                 id: item._id,
                 name: item.name,
                 email: item.email,
-                role:item.role,
+                role: item.role,
                 courses: item.courses.length,
                 createdAt: format(item.createdAt)
             })
@@ -102,52 +102,52 @@ const Allcourses:FC<Props> = ({isTeam}) => {
                             height="80vh"
                             sx={{
                                 "& .MuiDataGrid-root": {
-                                  border: "none",
-                                  outline: "none",
+                                    border: "none",
+                                    outline: "none",
                                 },
                                 "& .css-pqjvzy-MuiSvgIcon-root-MuiSelect-icon": {
-                                  color: theme === "dark" ? "#black" : "#000",
+                                    color: theme === "dark" ? "#black" : "#000",
                                 },
                                 "& .MuiDataGrid-sortIcon": {
-                                  color: theme === "dark" ? "#fff" : "#000",
+                                    color: theme === "dark" ? "#fff" : "#000",
                                 },
                                 "& .MuiDataGrid-row": {
-                                  color: theme === "dark" ? "#fff" : "#000",
-                                  borderBottom:
-                                    theme === "dark"
-                                      ? "1px solid #ffffff30!important"
-                                      : "1px solid #ccc!important",
+                                    color: theme === "dark" ? "#fff" : "#000",
+                                    borderBottom:
+                                        theme === "dark"
+                                            ? "1px solid #ffffff30!important"
+                                            : "1px solid #ccc!important",
                                 },
                                 "& .MuiTablePagination-root": {
-                                  color: theme === "dark" ? "#fff" : "#000",
+                                    color: theme === "dark" ? "#fff" : "#000",
                                 },
                                 "& .MuiDataGrid-cell": {
-                                  borderBottom: "none!important",
+                                    borderBottom: "none!important",
                                 },
                                 "& .name-column--cell": {
-                                  color: theme === "dark" ? "#fff" : "#000",
+                                    color: theme === "dark" ? "#fff" : "#000",
                                 },
                                 "& .MuiDataGrid-columnHeaders": {
-                                  backgroundColor: theme === "dark" ? "#3e4396" : "#A4A9FC",
-                                  borderBottom: "none",
-                                  color: theme === "dark" ? "#black" : "#000",
+                                    backgroundColor: theme === "dark" ? "#3e4396" : "#A4A9FC",
+                                    borderBottom: "none",
+                                    color: theme === "dark" ? "#black" : "#000",
                                 },
                                 "& .MuiDataGrid-virtualScroller": {
-                                  backgroundColor: theme === "dark" ? "#1F2A40" : "#F2F0F0",
+                                    backgroundColor: theme === "dark" ? "#1F2A40" : "#F2F0F0",
                                 },
                                 "& .MuiDataGrid-footerContainer": {
-                                  color: theme === "dark" ? "#fff" : "#000",
-                                  borderTop: "none",
-                                  backgroundColor: theme === "dark" ? "#3e4396" : "#A4A9FC",
+                                    color: theme === "dark" ? "#fff" : "#000",
+                                    borderTop: "none",
+                                    backgroundColor: theme === "dark" ? "#3e4396" : "#A4A9FC",
                                 },
                                 "& .MuiCheckbox-root": {
-                                  color:
-                                    theme === "dark" ? `#b7ebde !important` : `#000 !important`,
+                                    color:
+                                        theme === "dark" ? `#b7ebde !important` : `#000 !important`,
                                 },
                                 "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
-                                  color: `#fff !important`,
+                                    color: `#fff !important`,
                                 },
-                              }}
+                            }}
                         >
                             <DataGrid checkboxSelection rows={rows} columns={columns} />
                         </Box>

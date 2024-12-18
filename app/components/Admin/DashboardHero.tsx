@@ -2,19 +2,19 @@ import React, { useState } from 'react'
 import DashboardHeader from './DashboardHeader'
 import DashboardWidgets from './Widgets/DashboardWidgets'
 
-type Props = {isDashboard?:boolean}
+type Props = { isDashboard?: boolean }
 
-function DashboardHero({isDashboard}: Props) {
-  const [open,setOpen] = useState(false)
+function DashboardHero({ isDashboard }: Props) {
+  const [open, setOpen] = useState(false)
 
   return (
     <div>
-        <DashboardHeader open={open} setOpen={setOpen}/>
-        {
-          isDashboard &&(
-            <DashboardWidgets open={open}/>
-           )
-        }
+      <DashboardHeader open={open} setOpen={setOpen} />
+      {
+        isDashboard && (
+          <DashboardWidgets open={open} />
+        )
+      }
     </div>
   )
 }

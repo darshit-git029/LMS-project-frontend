@@ -12,15 +12,15 @@ const socketId = socketIO(ENDPOINT, { transports: ["websocket"] })
 
 
 type Props = {
-    open?:boolean
+    open?: boolean
     setOpen?: any
 }
 
-function DashboardHeader({   open ,setOpen}: Props) {
+function DashboardHeader({ open, setOpen }: Props) {
 
-    const {data,refetch} = useGetAllNotificationQuery(undefined,{refetchOnMountOrArgChange:true})
-    const [updateNotificationstatus,{isSuccess}] = useUpdateNotificationstatusMutation()
-    const [notification,setNotification] = useState<any>([])
+    const { data, refetch } = useGetAllNotificationQuery(undefined, { refetchOnMountOrArgChange: true })
+    const [updateNotificationstatus, { isSuccess }] = useUpdateNotificationstatusMutation()
+    const [notification, setNotification] = useState<any>([])
 
     const [audio] = useState(
         new Audio(
@@ -32,26 +32,26 @@ function DashboardHeader({   open ,setOpen}: Props) {
     }
 
     useEffect(() => {
-        if(data){
+        if (data) {
             setNotification(
-                data.notification.filter((item:any) => item.status === "unread")
+                data.notification.filter((item: any) => item.status === "unread")
             )
         }
-        if(isSuccess){
+        if (isSuccess) {
             refetch()
         }
         audio.load()
-    },[data,isSuccess])
+    }, [data, isSuccess])
 
     useEffect(() => {
-        socketId.on("newNotification",(data) => {
+        socketId.on("newNotification", (data) => {
             refetch()
             playerNotification()
         })
-    },[refetch])
+    }, [refetch])
 
     const handleNotificationStatusChange = async (id: string) => {
-            await updateNotificationstatus(id)
+        await updateNotificationstatus(id)
     }
 
     return (
@@ -60,7 +60,7 @@ function DashboardHeader({   open ,setOpen}: Props) {
             <div className="relative cursor-pointer m-2" onClick={() => setOpen(!open)}>
                 <IoMdNotificationsOutline className="text-2xl cursor-pointer text-black dark:text-white" />
                 <span className="absolute -top-2 right-2 rounded-full bg-[#37a39a] w-[18px] h-[18px] text-[12px] flex items-center justify-center text-white">
-                   {notification && notification.length}
+                    {notification && notification.length}
                 </span>
             </div>
             {open && (

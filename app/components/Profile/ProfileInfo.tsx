@@ -11,23 +11,23 @@ import { useSession } from 'next-auth/react'
 type Props = {
     avatar: string | null
     user: any
-    refetch:any
+    refetch: any
 }
 
-const ProfileInfo: FC<Props> = ({ user, avatar ,refetch}) => {
+const ProfileInfo: FC<Props> = ({ user, avatar, refetch }) => {
 
     const [name, setName] = useState(user && user.name)
     const [updateAvatar, { isSuccess, error }] = useUpdateAvatarMutation()
-    const [editProfile,{isSuccess:success,error:errors}] = useEditProfileMutation()
-    const [loaduser , setLoaduser] = useState(false)
-    const {} = useLoaduserQuery(undefined,{skip:loaduser ? false : true})
-    const {data} = useSession()
+    const [editProfile, { isSuccess: success, error: errors }] = useEditProfileMutation()
+    const [loaduser, setLoaduser] = useState(false)
+    const { } = useLoaduserQuery(undefined, { skip: loaduser ? false : true })
+    const { data } = useSession()
 
     const imageHandler = (e: any) => {
         const fileReader = new FileReader()
         fileReader.onload = () => {
             if (fileReader.readyState === 2) {
-                const avatar = fileReader.result    
+                const avatar = fileReader.result
                 updateAvatar(
                     avatar
                 )
@@ -37,20 +37,20 @@ const ProfileInfo: FC<Props> = ({ user, avatar ,refetch}) => {
     };
 
     useEffect(() => {
-        if(isSuccess || success){
+        if (isSuccess || success) {
             toast.success("Profile updated Successfully")
             refetch()
             setLoaduser(true)
-        }if(error || errors){
+        } if (error || errors) {
             toast.error("could not update profile picture")
         }
-    },[isSuccess,error,success,errors,refetch])
+    }, [isSuccess, error, success, errors, refetch])
 
-    const handelSubmit =  async (e:any) => {
+    const handelSubmit = async (e: any) => {
         e.preventDefault()
-        if(name !== ""){
-           await editProfile({
-                name:name,
+        if (name !== "") {
+            await editProfile({
+                name: name,
 
             })
         }
@@ -62,8 +62,8 @@ const ProfileInfo: FC<Props> = ({ user, avatar ,refetch}) => {
             <div className='w-full flex justify-center'>
                 <div className="relative z-[1]">
                     <Image
-            src={user.avatar || avatar ? user.avatar.url : avatarDefault}
-            width={120}
+                        src={user.avatar || avatar ? user.avatar.url : avatarDefault}
+                        width={120}
                         height={120}
                         alt=""
                         className="w-[100px]  h-[100px] cursor-pointer border border-[#37a39a] rounded-full"

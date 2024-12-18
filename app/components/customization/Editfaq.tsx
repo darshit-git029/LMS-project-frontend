@@ -17,9 +17,9 @@ function Editfaq({ }: Props) {
         FAQ = 'FAQ',
 
     }
-    const { data, isLoading,refetch } = useGetHeroDataQuery(LayoutType.FAQ, { refetchOnMountOrArgChange: true })
+    const { data, isLoading, refetch } = useGetHeroDataQuery(LayoutType.FAQ, { refetchOnMountOrArgChange: true })
 
-    
+
     const [editLayout, { isSuccess, error }] = useEditLayoutMutation()
     const [questions, setQuestion] = useState<any[]>([])
 
@@ -27,17 +27,17 @@ function Editfaq({ }: Props) {
         if (data) {
             setQuestion(data.getLayout[0].faq)
         }
-        if(isSuccess){
+        if (isSuccess) {
             refetch()
             toast.success("Question updated successfully")
         }
-        if(error){
-            if("data" in error){
+        if (error) {
+            if ("data" in error) {
                 const errordata = error as any
                 toast.error(errordata.data.message)
             }
         }
-    }, [data,isSuccess,error,refetch])
+    }, [data, isSuccess, error, refetch])
 
 
 
@@ -75,18 +75,18 @@ function Editfaq({ }: Props) {
     }
 
     const handleEdit = async (e: any) => {
-        if(!areQuestionsUnchanged(data.getLayout[0].faq,questions) && !isAnyQuestionEmpty(questions) ) {
+        if (!areQuestionsUnchanged(data.getLayout[0].faq, questions) && !isAnyQuestionEmpty(questions)) {
 
             try {
                 await editLayout({
                     type: LayoutType.FAQ,
-                    faq:questions
+                    faq: questions
                 });
             } catch (error) {
                 toast.error("Error updating the hero section");
             }
         }
-        }
+    }
 
     return (
         <div>

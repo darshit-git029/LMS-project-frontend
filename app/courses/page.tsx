@@ -17,33 +17,33 @@ type Props = {}
 
 const page = (props: Props) => {
 
-    enum LAYOUT {
-        CATEGORIES = "Categories"
+  enum LAYOUT {
+    CATEGORIES = "Categories"
+  }
+
+  const searchParams = useSearchParams()
+  const search = searchParams?.get("title")
+  const { data, isLoading } = useGetAlluserCourseQuery(undefined, {})
+  const { data: categoiresData } = useGetHeroDataQuery(LAYOUT.CATEGORIES, {})
+  const [Route, setRoute] = useState("Login")
+  const [open, setOpen] = useState(false)
+  const [courses, setCourses] = useState([])
+  const [category, setCategory] = useState("All")
+
+  useEffect(() => {
+    if (category === "All") {
+      setCourses(data?.course)
+    } if (category !== "All") {
+      setCourses(data?.course.filter((item: any) => item.category === category))
     }
+    if (search) {
+      setCourses(data?.course.filter((item: any) => item.name.toLowerCase().included(search.toLowerCase())))
+    }
+  }, [data, search, category])
 
-    const searchParams = useSearchParams()
-    const search = searchParams?.get("title")
-    const {data,isLoading} = useGetAlluserCourseQuery(undefined,{})
-    const {data:categoiresData}  = useGetHeroDataQuery(LAYOUT.CATEGORIES,{})
-    const [Route,setRoute] = useState("Login")
-    const [open,setOpen] = useState(false)
-    const [courses,setCourses] = useState([])
-    const [category,setCategory] = useState("All")
+  const categories = categoiresData?.getLayout?.category;
+  console.log(categories);
 
-    useEffect(() => {
-        if(category === "All"){
-            setCourses(data?.course)
-        }if(category !== "All"){
-            setCourses(data?.course.filter((item:any) => item.category === category))
-        }
-        if(search){
-            setCourses(data?.course.filter((item:any) => item.name.toLowerCase().included(search.toLowerCase())))
-        }
-    },[data,search,category])
-
- const categories = categoiresData?.getLayout?.category;
-    console.log(categories);
-    
   return (
     <div>
       {isLoading ? (
@@ -68,9 +68,8 @@ const page = (props: Props) => {
             <br />
             <div className="w-full flex items-center flex-wrap">
               <div
-                className={`h-[35px] ${
-                  category === "All" ? "bg-[crimson]" : "bg-[#5050cb]"
-                } m-3 px-3 rounded-[30px] flex items-center justify-center font-Poppins cursor-pointer`}
+                className={`h-[35px] ${category === "All" ? "bg-[crimson]" : "bg-[#5050cb]"
+                  } m-3 px-3 rounded-[30px] flex items-center justify-center font-Poppins cursor-pointer`}
                 onClick={() => setCategory("All")}
               >
                 All
@@ -79,11 +78,10 @@ const page = (props: Props) => {
                 categories.map((item: any, index: number) => (
                   <div key={index}>
                     <div
-                      className={`h-[35px] ${
-                        category === item.title
+                      className={`h-[35px] ${category === item.title
                           ? "bg-[crimson]"
                           : "bg-[#5050cb]"
-                      } m-3 px-3 rounded-[30px] flex items-center justify-center font-Poppins cursor-pointer`}
+                        } m-3 px-3 rounded-[30px] flex items-center justify-center font-Poppins cursor-pointer`}
                       onClick={() => setCategory(item.title)}
                     >
                       {item.title}
@@ -92,11 +90,11 @@ const page = (props: Props) => {
                 ))}
             </div>
             {
-                courses && courses.length === 0 && (
-                    <p className={`${style.label} justify-center min-h-[50vh] flex items-center`}>
-                    {search ? "No courses found!" : "No courses found in this category. Please try another one!"}
-                  </p>
-                )
+              courses && courses.length === 0 && (
+                <p className={`${style.label} justify-center min-h-[50vh] flex items-center`}>
+                  {search ? "No courses found!" : "No courses found in this category. Please try another one!"}
+                </p>
+              )
             }
             <br />
             <br />

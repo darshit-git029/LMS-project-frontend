@@ -20,7 +20,7 @@ const page = ({ params }: Props) => {
     const id = params.id
     const [Route, setRoute] = useState("Login")
     const [open, setOpen] = useState(false)
-    const { isLoading, error, data , refetch} = useLoaduserQuery(undefined, {refetchOnMountOrArgChange:true})
+    const { isLoading, error, data, refetch } = useLoaduserQuery(undefined, { refetchOnMountOrArgChange: true })
 
     useEffect(() => {
         if (data) {
@@ -28,7 +28,7 @@ const page = ({ params }: Props) => {
             if (!isPurchsed) {
                 refetch()
                 redirect(`/course/${id}`)
-            }if(error){ 
+            } if (error) {
                 redirect("/")
             }
         }
@@ -43,22 +43,22 @@ const page = ({ params }: Props) => {
         <>
             {
                 isLoading ? (
-                    <Loader/>
+                    <Loader />
                 ) : (
                     <div className="">
-                         <Heading
-                        title={`${data?.name} - E-Learning`}
-                        description="E-learing is a paltfrom for student to learn and get help form teachers"
-                        keyWord="Course Content"
-                    />
-                    <Header
-                        Route={Route}
-                        setRoute={setRoute}
-                        open={open}
-                        setOpen={setOpen}
-                        activeItem={1}
-                    />
-                        <CourseContent id={id} user={data?.user}/>
+                        <Heading
+                            title={`${data?.name} - E-Learning`}
+                            description="E-learing is a paltfrom for student to learn and get help form teachers"
+                            keyWord="Course Content"
+                        />
+                        <Header
+                            Route={Route}
+                            setRoute={setRoute}
+                            open={open}
+                            setOpen={setOpen}
+                            activeItem={1}
+                        />
+                        <CourseContent id={id} user={data?.user} />
                     </div>
                 )
             }

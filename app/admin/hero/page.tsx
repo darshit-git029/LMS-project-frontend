@@ -5,8 +5,8 @@ import Adminsidebar from "../../components/Admin/Sidebar/Adminsidebar"
 import AdminProtectd from '@/hooks/adminProtected'
 import DashboardHero from '../../components/Admin/DashboardHero'
 import EditHero from "../../components/customization/EditHero"
-type Props =  
- {}
+type Props =
+    {}
 
 function page({ }: Props) {
     return (
@@ -22,9 +22,9 @@ function page({ }: Props) {
                         <Adminsidebar />
                     </div>
                     <div className="w-[85%] ">
-                <DashboardHero/>
-                <EditHero/>
-                   </div>
+                        <DashboardHero />
+                        <EditHero />
+                    </div>
                 </div>
             </AdminProtectd>
         </div>

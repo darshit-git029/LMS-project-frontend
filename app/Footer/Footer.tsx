@@ -13,104 +13,76 @@ const Footer = (props: Props) => {
           <div className="space-y-3">
             <h3 className="text-[20px] font-[600] text-black dark:text-white">About</h3>
             <ul className="space-y-4">
-              <li>
-                <Link
-                  href="/about"
-                  className="text-base text-black dark:text-gray-300 dark:hover:text-white"
-                >
-                  Our Story
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/privacy-policy"
-                  className="text-base text-black dark:text-gray-300 dark:hover:text-white"
-                >
-                  Privacy Policy
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/faq"
-                  className="text-base text-black dark:text-gray-300 dark:hover:text-white"
-                >
-                  FAQ
-                </Link>
-              </li>
+              {[
+                { href: '/about', label: 'Our Story' },
+                { href: '/privacy-policy', label: 'Privacy Policy' },
+                { href: '/faq', label: 'FAQ' },
+              ].map((item, index) => (
+                <li key={index}>
+                  <Link
+                    href={item.href}
+                    className="text-base text-black dark:text-gray-300 dark:hover:text-white"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
           <div className="space-y-3">
             <h3 className="text-[20px] font-[600] text-black dark:text-white">Quick Links</h3>
             <ul className="space-y-4">
-              <li>
-                <Link
-                  href="/courses"
-                  className="text-base text-black dark:text-gray-300 dark:hover:text-white"
-                >
-                  Courses
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/profile"
-                  className="text-base text-black dark:text-gray-300 dark:hover:text-white"
-                >
-                  My Account
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/course-dashboard"
-                  className="text-base text-black dark:text-gray-300 dark:hover:text-white"
-                >
-                  Course Dashboard
-                </Link>
-              </li>
+              {[
+                { href: '/courses', label: 'Courses' },
+                { href: '/profile', label: 'My Account' },
+                { href: '/course-dashboard', label: 'Course Dashboard' },
+              ].map((item, index) => (
+                <li key={index}>
+                  <Link
+                    href={item.href}
+                    className="text-base text-black dark:text-gray-300 dark:hover:text-white"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
           <div className="space-y-3">
             <h3 className="text-[20px] font-[600] text-black dark:text-white">Social Links</h3>
             <ul className="space-y-4">
-              <li>
-                <Link
-                  href="https://www.youtube.com/channel/UCHz6Sne9splmvm-q2w1_HWQ"
-                  className="text-base text-black dark:text-gray-300 dark:hover:text-white"
-                >
-                  Youtube
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="https://www.instagram.com/shahriar_sajeeb_/"
-                  className="text-base text-black dark:text-gray-300 dark:hover:text-white"
-                >
-                  Instagram
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="https://www.github.com/shahriarsajeeb"
-                  className="text-base text-black dark:text-gray-300 dark:hover:text-white"
-                >
-                  github
-                </Link>
-              </li>
+              {[
+                {
+                  href: 'https://www.youtube.com/channel/UCHz6Sne9splmvm-q2w1_HWQ',
+                  label: 'Youtube',
+                },
+                { href: 'https://www.instagram.com/shahriar_sajeeb_/', label: 'Instagram' },
+                { href: 'https://www.github.com/shahriarsajeeb', label: 'GitHub' },
+              ].map((item, index) => (
+                <li key={index}>
+                  <Link
+                    href={item.href}
+                    className="text-base text-black dark:text-gray-300 dark:hover:text-white"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
           <div>
-            <h3 className="text-[20px] font-[600] text-black dark:text-white pb-3">Contact Info</h3>
+            <h3 className="text-[20px] font-[600] text-black dark:text-white pb-3">
+              Contact Info
+            </h3>
             <p className="text-base text-black dark:text-gray-300 dark:hover:text-white pb-2">
-            Call Us: 1-885-665-2022
+              Call Us: 1-885-665-2022
             </p>
-           
             <p className="text-base text-black dark:text-gray-300 dark:hover:text-white pb-2">
-            Address: +7011 Vermont Ave, Los Angeles, CA 90044
+              Address: +7011 Vermont Ave, Los Angeles, CA 90044
             </p>
-         
-            <p className="text-base text-black dark:text-gray-300 dark:hover:text-white  pb-2">
-            Mail Us: admin@furrisic.com
+            <p className="text-base text-black dark:text-gray-300 dark:hover:text-white pb-2">
+              Mail Us: admin@furrisic.com
             </p>
-            
           </div>
         </div>
         <br />

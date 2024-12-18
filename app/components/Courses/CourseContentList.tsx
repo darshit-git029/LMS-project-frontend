@@ -20,7 +20,7 @@ const CourseContentList: FC<Props> = (props) => {
     ...new Set<string>(props?.data?.map((item: any) => item.videoSection)),
   ];
 
-  let totalCount: number = 0; 
+  let totalCount: number = 0;
 
   const toggleSection = (section: string) => {
     const newVisibleSections = new Set(visibleSections);
@@ -83,13 +83,12 @@ const CourseContentList: FC<Props> = (props) => {
             {isSectionVisible && (
               <div className="w-full">
                 {sectionVideos.map((item: any, index: number) => {
-                  const videoIndex: number = sectionStartIndex + index; 
+                  const videoIndex: number = sectionStartIndex + index;
                   const contentLength: number = item.videoLength / 60;
                   return (
                     <div
-                      className={`w-full ${
-                        videoIndex === props.activeVideo ? "bg-slate-800" : ""
-                      } cursor-pointer transition-all p-2`}
+                      className={`w-full ${videoIndex === props.activeVideo ? "bg-slate-800" : ""
+                        } cursor-pointer transition-all p-2`}
                       key={item._id}
                       onClick={() => props.isDemo ? null : props?.setActiveVideo(videoIndex)}
                     >

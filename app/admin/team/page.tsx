@@ -6,8 +6,8 @@ import AdminProtectd from '@/hooks/adminProtected'
 import DashboardHero from '../../components/Admin/DashboardHero'
 import AllUsers from '@/app/components/Users/AllUsers'
 
-type Props =  
- {}
+type Props =
+    {}
 
 function page({ }: Props) {
     return (
@@ -23,8 +23,8 @@ function page({ }: Props) {
                         <Adminsidebar />
                     </div>
                     <div className="w-[85%] ">
-                <DashboardHero/>
-                <AllUsers isTeam={true}/>
+                        <DashboardHero />
+                        <AllUsers isTeam={true} />
                     </div>
                 </div>
             </AdminProtectd>

@@ -1,5 +1,5 @@
 "use client"
-import {style} from "../../../style"
+import { style } from "../../../style"
 import React, { useEffect } from "react";
 import {
   LineChart,
@@ -20,7 +20,7 @@ type Props = {
 };
 
 export default function OrdersAnalytics({ isDashboard }: Props) {
-  const {data, isLoading } = useGetOrderAnalyticsQuery({});
+  const { data, isLoading } = useGetOrderAnalyticsQuery({});
 
   const analyticsData: any = [];
 
@@ -39,9 +39,8 @@ export default function OrdersAnalytics({ isDashboard }: Props) {
             className={isDashboard ? "mt-[0px] pl-[40px] mb-2" : "mt-[50px]"}
           >
             <h1
-              className={`${style.title} ${
-                isDashboard && "!text-[20px]"
-              } px-5 !text-start`}
+              className={`${style.title} ${isDashboard && "!text-[20px]"
+                } px-5 !text-start`}
             >
               Orders Analytics
             </h1>
@@ -52,9 +51,8 @@ export default function OrdersAnalytics({ isDashboard }: Props) {
             )}
           </div>
           <div
-            className={`w-full ${
-              !isDashboard ? "h-[90%]" : "h-full"
-            } flex items-center justify-center`}
+            className={`w-full ${!isDashboard ? "h-[90%]" : "h-full"
+              } flex items-center justify-center`}
           >
             <ResponsiveContainer
               width={isDashboard ? "100%" : "90%"}

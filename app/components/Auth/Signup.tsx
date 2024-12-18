@@ -9,7 +9,6 @@ import {
 } from "react-icons/ai";
 import { style } from "../../style"
 import { toast } from "react-hot-toast";
-import Verification from "./Verification";
 import { useRegisterMutation } from "@/redux/features/auth/authapi";
 import { Button } from "@mui/material";
 import { LuLoader2 } from "react-icons/lu";

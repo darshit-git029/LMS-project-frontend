@@ -12,7 +12,7 @@ type Props = {}
 const page = (props: Props) => {
 
     const [open, setOpen] = useState(false)
-    const [activeItem, setActveitem] = useState(4)  
+    const [activeItem, setActveitem] = useState(4)
     const [Route, setRoute] = useState("Login")
 
     return (
@@ -29,7 +29,7 @@ const page = (props: Props) => {
                 setRoute={setRoute}
                 Route={Route}
             />
-            <Faq/>
+            <Faq />
             <Footer />
         </div>
     )

@@ -17,7 +17,7 @@ type Props = {
 
 const Profile: FC<Props> = ({ user }) => {
 
-    const {data,isLoading,refetch} = useGetAlluserCourseQuery(undefined,{refetchOnMountOrArgChange:true})
+    const { data, isLoading, refetch } = useGetAlluserCourseQuery(undefined, { refetchOnMountOrArgChange: true })
 
     const [scroll, setScroll] = useState(false)
     const [active, setActive] = useState(1)
@@ -36,13 +36,13 @@ const Profile: FC<Props> = ({ user }) => {
     useEffect(() => {
         if (data) {
             const filteredCourses = user.courses
-              .map((userCourse: any) =>
-                data.course.find((course: any) => course._id === userCourse._id)
-              )
-              .filter((course: any) => course !== undefined);
+                .map((userCourse: any) =>
+                    data.course.find((course: any) => course._id === userCourse._id)
+                )
+                .filter((course: any) => course !== undefined);
             setCourse(filteredCourses);
-          }
-        }, [data]);
+        }
+    }, [data]);
 
     return (
         <div className='w-[85%] min-h-screen flex mx-auto'>
@@ -59,7 +59,7 @@ const Profile: FC<Props> = ({ user }) => {
             {
                 active === 1 && (
                     <div className="w-full h-full bg-transparent mt-[80px]">
-                        <ProfileInfo avatar={avatar} user={user} refetch={refetch}/>
+                        <ProfileInfo avatar={avatar} user={user} refetch={refetch} />
                     </div>
                 )
             }
@@ -75,7 +75,7 @@ const Profile: FC<Props> = ({ user }) => {
                     <div className="grid grid-cols-1 gap-[20px] md:grid-cols-2 md:gap-[25px] lg:grid-cols-3 lg:gap-[25px] 1500px:grid-cols-4 1500px:gap-[35px] mb-12 border-0">
                         {course &&
                             course.map((item: any, index: number) => (
-                                <CourseCard item={item} key={index} user={user} isProfile={true}  />
+                                <CourseCard item={item} key={index} user={user} isProfile={true} />
                             ))}
                     </div>
                     {course.length === 0 && (

@@ -117,7 +117,7 @@ const CreateCourse = (props: Props) => {
             await createCourse(data);
         }
     };
-console.log(courseData);
+    console.log(courseData);
 
     return (
         <div className="w-full flex min-h-screen">

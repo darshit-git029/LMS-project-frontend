@@ -15,8 +15,8 @@ import { LuLoader2 } from 'react-icons/lu'
 
 type Props = {
     setRoute: (Route: string) => void
-    setOpen:(open:boolean) => void
-    refetch?:any
+    setOpen: (open: boolean) => void
+    refetch?: any
 }
 
 const schema = Yup.object().shape({
@@ -26,43 +26,43 @@ const schema = Yup.object().shape({
 
 
 
-const Login: FC<Props> = ({setRoute,setOpen,refetch}) => {
+const Login: FC<Props> = ({ setRoute, setOpen, refetch }) => {
 
 
     const [show, setShow] = useState(false)
-    const [login,{isSuccess,error,isLoading}] = useLoginMutation()
+    const [login, { isSuccess, error, isLoading }] = useLoginMutation()
 
     const formik = useFormik({
         initialValues: { email: "", password: "" },
         validationSchema: schema,
-        onSubmit: async ({ email, password }) => {  
-            await login({email,password})
+        onSubmit: async ({ email, password }) => {
+            await login({ email, password })
         }
     })
 
     useEffect(() => {
-        if(isSuccess){
+        if (isSuccess) {
             setOpen(false)
             toast.success("Login Successfully")
             refetch()
-        }if(error){
-            if("data" in error){
+        } if (error) {
+            if ("data" in error) {
                 const errordata = error as any
                 toast.error(errordata.data.message)
             }
         }
-    },[isSuccess,error,setOpen])
+    }, [isSuccess, error, setOpen])
 
 
     const { errors, touched, values, handleChange, handleSubmit } = formik
 
     return (
-                
+
         <div className='w-full 320px:!p-[80px]  p-[6    0px]'>
             <h1 className={`${style.title}`}>
                 Login with Elearning
             </h1>
-            <form  onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>
                 <label className={`${style.label}`} htmlFor="email">
                     Enter your Email
                 </label>
@@ -110,16 +110,16 @@ const Login: FC<Props> = ({setRoute,setOpen,refetch}) => {
                         <span className="text-red-500 pt-2 block">{errors.password}</span>
                     )}
                 </div>
-               
+
                 <div className="w-full mt-5">
                     {
                         isLoading ? (
                             <Button className={`${style.button}`}>
-                            <LuLoader2 className="mr-2 h-4 w-4 animate-spin" />
-                            Please Wait
-                          </Button>                
+                                <LuLoader2 className="mr-2 h-4 w-4 animate-spin" />
+                                Please Wait
+                            </Button>
                         ) : (
-                            <input type="submit" value="Login" className={`${style.button}`}/>
+                            <input type="submit" value="Login" className={`${style.button}`} />
                         )
                     }
 

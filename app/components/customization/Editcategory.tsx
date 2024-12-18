@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-empty-object-type */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 import { style } from '@/app/style';
 import { useEditLayoutMutation, useGetHeroDataQuery } from '@/redux/Layout/layoutApi';
@@ -23,7 +26,7 @@ const EditCategories = (props: Props) => {
     useEffect(() => {
         if (data && data.getLayout.length > 0) {
             setCategories
-            (data.getLayout[0]?.category || []);
+                (data.getLayout[0]?.category || []);
         }
         if (layoutSuccess) {
             toast.success("Categories updated successfully");
@@ -36,7 +39,7 @@ const EditCategories = (props: Props) => {
 
     const handleCategoriesAdd = (id: string, value: string) => {
         console.log("Add category title");
-        
+
         setCategories(categories =>
             categories.map((cat) => (cat._id === id ? { ...cat, title: value } : cat))
         );
@@ -59,7 +62,7 @@ const EditCategories = (props: Props) => {
     };
 
     const editCategoriesHandler = async () => {
-        if (!areCategoriesUnchanged(data.getLayout?.category, categories) && 
+        if (!areCategoriesUnchanged(data.getLayout?.category, categories) &&
             !isAnyCategoryTitleEmpty(categories)) {
             await editLayout({
                 type: "Categories",
@@ -112,7 +115,7 @@ const EditCategories = (props: Props) => {
                             !rounded absolute bottom-12 right-12`}
                         onClick={
                             areCategoriesUnchanged(data.getLayout[0]?.category, categories) ||
-                            isAnyCategoryTitleEmpty(categories)
+                                isAnyCategoryTitleEmpty(categories)
                                 ? () => null
                                 : editCategoriesHandler
                         }

@@ -20,22 +20,22 @@ type VerifyNumber = {
 
 const Verification: FC<Props> = ({ setRoute }) => {
     const { token } = useSelector((state: any) => state.auth);
-    const [activation,{isSuccess,error}] = useActivationMutation()
+    const [activation, { isSuccess, error }] = useActivationMutation()
     const [invalidError, setInvalidError] = useState<boolean>(false);
 
     useEffect(() => {
-        if(isSuccess){
+        if (isSuccess) {
             toast.success("Account cretaed successfully");
             setRoute("Login")
         }
-        if(error){
-            if("data" in error){
+        if (error) {
+            if ("data" in error) {
                 const errordata = error as any
                 toast.error(errordata.data.message)
                 setInvalidError(true)
             }
         }
-    },[isSuccess,error  ])
+    }, [isSuccess, error])
 
 
 
@@ -56,14 +56,14 @@ const Verification: FC<Props> = ({ setRoute }) => {
     const verificationHandler = async () => {
         const verificationNumber = Object.values(VerifyNumber).join("");
         if (verificationNumber.length !== 4) {
-          setInvalidError(true);
-          return;
+            setInvalidError(true);
+            return;
         }
         await activation({
-          activation_token: token,
-          activation_code: verificationNumber,
+            activation_token: token,
+            activation_code: verificationNumber,
         });
-      };
+    };
 
     const handleInputChange = (index: number, value: string) => {
         setInvalidError(false);

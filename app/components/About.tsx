@@ -13,7 +13,7 @@ const About = () => {
 
         {/* Main Description */}
         <p className="text-[18px] font-Poppins leading-relaxed text-justify">
-          Are you ready to take your programming skills to the next level? Look no further than 
+          Are you ready to take your programming skills to the next level? Look no further than
           <span className="font-semibold"> E-learning</span>, the premier programming community dedicated to helping new programmers achieve their goals and reach their full potential.
           <br />
           <br />

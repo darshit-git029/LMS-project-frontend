@@ -5,24 +5,24 @@ import { FC, useEffect, useState } from "react";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography } from "@mui/material";
 import "react-pro-sidebar/dist/css/styles.css";
-import  {
-    HomeOutlinedIcon,
-    ArrowForwardIosIcon,
-    ArrowBackIosIcon,
-    PeopleOutlinedIcon,
-    ReceiptOutlinedIcon,
-    BarChartOutlinedIcon,
-    MapOutlinedIcon,
-    GroupsIcon,
-    OndemandVideoIcon,
-    VideoCallIcon,
-    WebIcon,
-    QuizIcon,
-    WysiwygIcon,
-    ManageHistoryIcon,
-    SettingsIcon,
-    ExitToAppIcon
- } from "./Icon"
+import {
+  HomeOutlinedIcon,
+  ArrowForwardIosIcon,
+  ArrowBackIosIcon,
+  PeopleOutlinedIcon,
+  ReceiptOutlinedIcon,
+  BarChartOutlinedIcon,
+  MapOutlinedIcon,
+  GroupsIcon,
+  OndemandVideoIcon,
+  VideoCallIcon,
+  WebIcon,
+  QuizIcon,
+  WysiwygIcon,
+  ManageHistoryIcon,
+  SettingsIcon,
+  ExitToAppIcon
+} from "./Icon"
 import avatarDefault from "../../../../assect/client-1.jpg";
 import { useSelector } from "react-redux";
 import Link from "next/link";
@@ -72,9 +72,8 @@ const Sidebar = () => {
     <Box
       sx={{
         "& .pro-sidebar-inner": {
-          background: `${
-            theme === "dark" ? "#111C43 !important" : "#fff !important"
-          }`,
+          background: `${theme === "dark" ? "#111C43 !important" : "#fff !important"
+            }`,
         },
         "& .pro-icon-wrapper": {
           backgroundColor: "transparent !important",
@@ -102,7 +101,7 @@ const Sidebar = () => {
           top: 0,
           left: 0,
           height: "100vh",
-          zIndex:99999999999999,
+          zIndex: 99999999999999,
           width: isCollapsed ? "0%" : "16%",
         }}
       >
@@ -122,11 +121,11 @@ const Sidebar = () => {
                 alignItems="center"
                 ml="15px"
               >
-               <Link href="/" className="block">
-               <h3 className="text-[25px] font-Poppins uppercase dark:text-white text-black">
-                  ELearning
-                </h3>
-               </Link>
+                <Link href="/" className="block">
+                  <h3 className="text-[25px] font-Poppins uppercase dark:text-white text-black">
+                    ELearning
+                  </h3>
+                </Link>
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)} className="inline-block">
                   <ArrowBackIosIcon className="text-black dark:text-[#ffffffc1]" />
                 </IconButton>

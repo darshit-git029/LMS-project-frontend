@@ -2,10 +2,10 @@
 
 import CourseDetailsPage from "../../components/Courses/CourseDetailsPage"
 
-const Page = ({params}:any) => {
-    return(
+const Page = ({ params }: any) => {
+    return (
         <div>
-            <CourseDetailsPage id={params.id}/>
+            <CourseDetailsPage id={params.id} />
         </div>
     )
 }

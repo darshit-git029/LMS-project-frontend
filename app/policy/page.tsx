@@ -17,11 +17,11 @@ const page = (props: Props) => {
 
     return (
         <div>
-             <Heading
-          title="Policy E-Learning"
-          description="E-learing is a paltfrom for student to learn and get help form teachers"
-          keyWord="Programming,MERN,Database"
-        />
+            <Heading
+                title="Policy E-Learning"
+                description="E-learing is a paltfrom for student to learn and get help form teachers"
+                keyWord="Programming,MERN,Database"
+            />
             <Header
                 open={open}
                 setOpen={setOpen}
@@ -29,8 +29,8 @@ const page = (props: Props) => {
                 setRoute={setRoute}
                 Route={Route}
             />
-            <Policy/>
-        <Footer/>
+            <Policy />
+            <Footer />
         </div>
     )
 }

@@ -1,10 +1,12 @@
+/* eslint-disable @typescript-eslint/no-empty-object-type */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import React from 'react'
 import { Bar, BarChart, ResponsiveContainer, XAxis, Label, YAxis, LabelList } from "recharts"
 import Loader from '../../Loaders/Loader'
-import {useGetCourseAnalyticsQuery } from '@/redux/features/Analytics/analyticsApi'
+import { useGetCourseAnalyticsQuery } from '@/redux/features/Analytics/analyticsApi'
 import { style } from '@/app/style'
 
 
@@ -15,10 +17,10 @@ const CourseAnalytics = (props: Props) => {
     const { data, isLoading, error } = useGetCourseAnalyticsQuery({})
 
 
-    const analyticsData:any = []
+    const analyticsData: any = []
 
-    data && data.course.last12Months.forEach((item:any) => {
-        analyticsData.push({name:item.month,uv:item.count})
+    data && data.course.last12Months.forEach((item: any) => {
+        analyticsData.push({ name: item.month, uv: item.count })
     })
 
     const minvalue = 0

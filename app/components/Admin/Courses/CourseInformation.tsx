@@ -22,16 +22,16 @@ const CourseInformation: FC<Props> = ({ courseInfo, setCourseInfo, active, setAc
 
     const [drageing, setDraging] = useState(false)
 
-    const { data } = useGetHeroDataQuery(LayoutType.CATEGORIES,{});
+    const { data } = useGetHeroDataQuery(LayoutType.CATEGORIES, {});
 
-    const [category,setCategory] = useState([])
+    const [category, setCategory] = useState([])
 
     useEffect(() => {
-        if(data){
+        if (data) {
             setCategory(data?.getLayout[0].category)
         }
-    },[data])
-    
+    }, [data])
+
     const handleSubmit = (e: any) => {
         e.preventDefault()
         setActive(active + 1)
@@ -152,39 +152,39 @@ const CourseInformation: FC<Props> = ({ courseInfo, setCourseInfo, active, setAc
                 </div>
                 <br />
                 <div className="w-full flex justify-between">
-                <div className="w-[45%]">
-                    <label htmlFor='' className={`${style.label}`}>
-                        Course Tags
-                    </label>
-                    <input
-                        type='text'
-                        name=''
-                        required
-                        value={courseInfo.tags}
-                        onChange={(e) =>
-                            setCourseInfo({ ...courseInfo, tags: e.target.value })
-                        }
-                        id='tags'
-                        placeholder="type your course tags here"
-                        className={`${style.input}`}
-                    >
-                    </input>
-                </div>
+                    <div className="w-[45%]">
+                        <label htmlFor='' className={`${style.label}`}>
+                            Course Tags
+                        </label>
+                        <input
+                            type='text'
+                            name=''
+                            required
+                            value={courseInfo.tags}
+                            onChange={(e) =>
+                                setCourseInfo({ ...courseInfo, tags: e.target.value })
+                            }
+                            id='tags'
+                            placeholder="type your course tags here"
+                            className={`${style.input}`}
+                        >
+                        </input>
+                    </div>
                     <div className="w-[45%]">
                         <label htmlFor='' className={`${style.label}`}>
                             Course Categories
                         </label>
-                        <select name="" id="" value={courseInfo.category}  className={`${style.input} dark:text-white text-black dark:bg-black bg-white` } onChange={(e) => setCourseInfo({...courseInfo, category:e.target.value})}>
+                        <select name="" id="" value={courseInfo.category} className={`${style.input} dark:text-white text-black dark:bg-black bg-white`} onChange={(e) => setCourseInfo({ ...courseInfo, category: e.target.value })}>
                             <option value="">Select category</option>
                             {
-                               category.map((item:any) => (
+                                category.map((item: any) => (
                                     <option value={item.title} key={item._id}>{item.title}</option>
-                               ))
+                                ))
                             }
                         </select>
                     </div>
                 </div>
-                
+
                 <br />
                 <div className="w-full flex justify-between">
                     <div className="w-[45%]">
@@ -254,8 +254,8 @@ const CourseInformation: FC<Props> = ({ courseInfo, setCourseInfo, active, setAc
                         type="submit"
                         value="Next"
                         className="w-full 800px:w-[180px] h-[40px] bg-[#37a39a] text-center text-[#fff] rounded mt-8 cursor-pointer"
-                        
-                        />
+
+                    />
                 </div>
                 <br />
                 <br />

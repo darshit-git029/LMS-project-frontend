@@ -18,17 +18,17 @@ type Props = {
     avatar: string | null
     setActive: (active: number) => void
     logoutHandler: any
-    refetch?:any
+    refetch?: any
 }
 
-const SidebarProfile: FC<Props> = ({ user, active, avatar, logoutHandler, setActive,refetch }) => {
+const SidebarProfile: FC<Props> = ({ user, active, avatar, logoutHandler, setActive, refetch }) => {
     const { data } = useSession()
     const [loaduser, setLoaduser] = useState(false)
 
     useEffect(() => {
         setLoaduser(true)
-    }, [setLoaduser,refetch])
-    
+    }, [setLoaduser, refetch])
+
     return (
         <div className='w-full'>
             <div className={`w-full flex items-center px-3 py-4 cursor-pointer  ${active === 1 ? "dark:bg-slate-800 bg-white" : "bg-transparent"}`} onClick={() => setActive(1)}>
@@ -54,8 +54,8 @@ const SidebarProfile: FC<Props> = ({ user, active, avatar, logoutHandler, setAct
             </div>
             {
                 user?.role === "admin" && (
-                    <Link  href={'/admin'} className={`w-full flex items-center px-3 py-4 cursor-pointer  ${active === 5 ? "dark:bg-slate-800 bg-white" : "bg-transparent"}`} onClick={() => setActive(5)}>
-                        <MdOutlineAdminPanelSettings size={20} className=" text-black dark:text-white"/>
+                    <Link href={'/admin'} className={`w-full flex items-center px-3 py-4 cursor-pointer  ${active === 5 ? "dark:bg-slate-800 bg-white" : "bg-transparent"}`} onClick={() => setActive(5)}>
+                        <MdOutlineAdminPanelSettings size={20} className=" text-black dark:text-white" />
                         <h2 className='pl-2 800px:block hidden font-Poppins text-black dark:text-white'> Admin Dashboard</h2>
                     </Link>
                 )

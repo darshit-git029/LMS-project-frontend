@@ -91,9 +91,9 @@ const CoursePreview: FC<Props> = ({
                     </h1>
                     <div className="flex items-center justify-between pt-3">
                         <div className="flex items-center">
-              <Ratings rating={0} />
-              <h5>0 Reviews</h5>
-            </div>
+                            <Ratings rating={0} />
+                            <h5>0 Reviews</h5>
+                        </div>
                         <h5>0 Students</h5>
                     </div>
                     <br />

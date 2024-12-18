@@ -215,8 +215,8 @@ const CourseContentMedia: FC<Props> = ({ data, id, activeVideo, setActiveVideo, 
                                 <br />
                                 <h1 className="text-[25px] font-Poppins font-[600] text-black dark:text-white">
                                     Course Links
-                                </h1><br/>
-                                 <h2 className="800px:text-[20px] 800px:inline-block dark:text-white text-black">
+                                </h1><br />
+                                <h2 className="800px:text-[20px] 800px:inline-block dark:text-white text-black">
                                     {item.title && item.title + " :"}
                                 </h2>
                                 <a

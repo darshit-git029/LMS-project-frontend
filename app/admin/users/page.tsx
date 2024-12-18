@@ -22,8 +22,8 @@ function page({ }: Props) {
                         <Adminsidebar />
                     </div>
                     <div className="w-[85%] ">
-                <DashboardHero/>
-                <AllUsers/>
+                        <DashboardHero />
+                        <AllUsers />
                     </div>
                 </div>
             </AdminProtectd>

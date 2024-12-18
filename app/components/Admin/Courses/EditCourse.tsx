@@ -20,7 +20,7 @@ type Props = {
 
 const EditCourse: FC<Props> = ({ id }) => {
 
-    
+
     const [editCourse, { isSuccess, error }] = useEditCourseMutation();
     const [courseData, setCourseData] = useState({});
     const [active, setActive] = useState(0);
@@ -43,7 +43,7 @@ const EditCourse: FC<Props> = ({ id }) => {
             }
         }
     }, [isSuccess, error]);
-    
+
 
 
     useEffect(() => {
@@ -64,8 +64,8 @@ const EditCourse: FC<Props> = ({ id }) => {
             setCourseContentData(editCourseData.courseData)
         }
     }, [editCourseData]);
-    
-    
+
+
     const [courseInfo, setCourseInfo] = useState({
         name: "",
         description: "",
@@ -85,7 +85,7 @@ const EditCourse: FC<Props> = ({ id }) => {
             title: "",
             description: "",
             videoSection: "Untitled Section",
-            videoLength:"",
+            videoLength: "",
             links: [
                 {
                     title: "",
@@ -111,7 +111,7 @@ const EditCourse: FC<Props> = ({ id }) => {
                 title: courseContent.title,
                 description: courseContent.description,
                 videoSection: courseContent.videoSection,
-                videoLength:courseContent.videoLength,
+                videoLength: courseContent.videoLength,
                 links: courseContent.links.map((link) => ({
                     title: link.title,
                     url: link.url,

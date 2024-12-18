@@ -16,16 +16,16 @@ const EditHero: FC<Props> = (props: Props) => {
     BANNER = 'banner',
     FAQ = 'FAQ',
     CATEGORY = 'Categories'
-}
+  }
 
-  const [image, setImage] = useState(""); 
+  const [image, setImage] = useState("");
   const [title, setTitle] = useState("");
   const [subTitle, setSubTitle] = useState("");
-  
-  const { data , refetch} = useGetHeroDataQuery(LayoutType.BANNER, {
-    refetchOnMountOrArgChange:true
+
+  const { data, refetch } = useGetHeroDataQuery(LayoutType.BANNER, {
+    refetchOnMountOrArgChange: true
   });
-  
+
   const [editLayout, { isLoading, isSuccess, error }] = useEditLayoutMutation();
 
   useEffect(() => {
@@ -49,7 +49,7 @@ const EditHero: FC<Props> = (props: Props) => {
   }, [data, isSuccess, error]);
 
   const handleUpdate = (e: any) => {
-    e.preventDefault(); 
+    e.preventDefault();
 
     const file = e.target.files?.[0];
     if (file) {
@@ -83,26 +83,26 @@ const EditHero: FC<Props> = (props: Props) => {
     <>
       <div className="w-full 1000px:flex items-center">
         <div className="absolute top-[100px] 1000px:top-[unset] 1500px:h-[700px] 1500px:w-[700px] 1100px:h-[500px] 1100px:w-[500px] h-[50vh] w-[50vh] hero_animation rounded-[50%] 1100px:left-[18rem] 1500px:left-[21rem]"></div>
-        
+
         <div className="1000px:w-[40%] flex 1000px:min-h-screen items-center justify-end pt-[70px] 1000px:pt-[0] z-10">
           <div className="relative flex items-center justify-end">
-            
-      
+
+
             {image ? (
               <img
-                src={image}  
+                src={image}
                 alt="Hero Banner"
                 className="object-contain 1100px:max-w-[90%] w-[90%] 1500px:max-w-[85%] h-[auto] z-[10]"
               />
             ) : (
-              <p>No image available</p> 
+              <p>No image available</p>
             )}
 
             <input
               type="file"
               id="banner"
               accept="image/*"
-              onChange={handleUpdate} 
+              onChange={handleUpdate}
               className="hidden"
             />
             <label htmlFor="banner" className="absolute bottom-0 right-0 z-20">
@@ -130,21 +130,19 @@ const EditHero: FC<Props> = (props: Props) => {
           <br />
           <br />
           <div
-            className={`${
-              style.button
-            } !w-[100px] !min-h-[40px] !h-[40px] dark:text-white text-black bg-[#cccccc34] 
-          ${
-            data?.layout?.banner.title !== title ||
-            data?.layout?.banner.subtitle  !== subTitle ||
-            data?.getLayout[0].banner.image?.url !== image
-              ? "!cursor-pointer !bg-[#42d383]"
-              : "!cursor-not-allowed"
-          }
+            className={`${style.button
+              } !w-[100px] !min-h-[40px] !h-[40px] dark:text-white text-black bg-[#cccccc34] 
+          ${data?.layout?.banner.title !== title ||
+                data?.layout?.banner.subtitle !== subTitle ||
+                data?.getLayout[0].banner.image?.url !== image
+                ? "!cursor-pointer !bg-[#42d383]"
+                : "!cursor-not-allowed"
+              }
           !rounded absolute bottom-12 right-12`}
             onClick={
               data?.layout?.banner.title !== title ||
-            data?.layout?.banner.subTitle  !== subTitle ||
-            data?.getLayout[0].banner.image?.url !== image
+                data?.layout?.banner.subTitle !== subTitle ||
+                data?.getLayout[0].banner.image?.url !== image
                 ? handleEdit
                 : () => null
             }

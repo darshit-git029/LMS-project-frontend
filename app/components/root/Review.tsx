@@ -13,15 +13,15 @@ const Review = (props: Props) => {
     const { data, isLoading } = useGetAlluserCourseQuery({});
     const [course, setCourses] = useState<any[]>([]);
     console.log(data);
-    
+
     useEffect(() => {
         if (data?.course) {
             setCourses(data.course);
         }
     }, [data]);
-    
+
     if (isLoading) {
-        <Loader/>
+        <Loader />
     }
 
     return (
@@ -37,7 +37,7 @@ const Review = (props: Props) => {
                 </div>
                 <div className="w-full 800px:w-[50%]">
                     <h1 className='text-center font-Poppins text-[25px] leading-[35px] sm:text-3xl lg:text-4xl dark:text-white text-black 800px:leading-[60px]'>
-                        Our Students Are <span  className="bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-transparent bg-clip-text">Our Strength</span><br />
+                        Our Students Are <span className="bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-transparent bg-clip-text">Our Strength</span><br />
                         See What They Say About Us
                     </h1>
                     <br />

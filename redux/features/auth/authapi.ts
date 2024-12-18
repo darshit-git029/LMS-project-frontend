@@ -1,4 +1,3 @@
-
 import toast from "react-hot-toast";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { apiSlice } from "../apiSlice";
@@ -21,14 +20,12 @@ export const authApi = apiSlice.injectEndpoints({
         credentials: "include" as const,
       }),
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
-
         const result = await queryFulfilled;
         dispatch(
           userregistration({
             token: result.data.activationToken,
-          })
+          }),
         );
-
       },
     }),
     activation: builder.mutation({
@@ -53,15 +50,13 @@ export const authApi = apiSlice.injectEndpoints({
         credentials: "include" as const,
       }),
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
-
         const result = await queryFulfilled;
         dispatch(
           userLoggedIn({
             accessToken: result.data.accessToken,
             user: result.data.user,
-          })
+          }),
         );
-
       },
     }),
     socialAuth: builder.mutation({
@@ -71,20 +66,18 @@ export const authApi = apiSlice.injectEndpoints({
         body: {
           email,
           name,
-          avatar
+          avatar,
         },
         credentials: "include" as const,
       }),
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
-
         const result = await queryFulfilled;
         dispatch(
           userLoggedIn({
             accessToken: result.data.accessToken,
             user: result.data.user,
-          })
+          }),
         );
-
       },
     }),
     Logout: builder.query({
@@ -94,14 +87,11 @@ export const authApi = apiSlice.injectEndpoints({
         credentials: "include" as const,
       }),
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
-
-        dispatch(
-          userLoggout()
-        );
-
+        dispatch(userLoggout());
       },
     }),
-  })
-})
+  }),
+});
 
-export const { useRegisterMutation, useActivationMutation, useLoginMutation, useSocialAuthMutation, useLogoutQuery } = authApi
+export const { useRegisterMutation, useActivationMutation, useLoginMutation, useSocialAuthMutation, useLogoutQuery } =
+  authApi;
