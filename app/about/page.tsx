@@ -1,44 +1,35 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
+
 import React, { useState } from 'react'
 import Header from '../components/Header'
-import { Route } from 'next'
 import About from '../components/About'
 import Footer from '../Footer/Footer'
 import Heading from '../utils/Heading'
 
-type Props = {
-    open: any
-    setOpen: (open: any) => void
-    activeItem: any
-    Route: any
-    setRoute: (Route: any) => void
-}
-const page = (props: Props) => {
-
+const Page = () => {
     const [open, setOpen] = useState(false)
-    const [activeItem, setActveitem] = useState(2)
-    const [Route, setRoute] = useState("Login")
+    const [activeItem] = useState(2)
+    const [route, setRoute] = useState("Login")
 
     return (
-        <>
-            <div>
-                <Heading
-                    title="about-us E-learing"
-                    description="E-learing is a paltfrom for student to learn and get help form teachers"
-                    keyWord="Programming,MERN,Database"
-                />
-                <Header
-                    open={open}
-                    setOpen={setOpen}
-                    activeItem={activeItem}
-                    setRoute={setRoute}
-                    Route={Route}
-                />
-                <About />
-                <Footer />
-            </div>
-        </>
+        <div>
+            <Heading
+                title="about-us E-learning"
+                description="E-learning is a platform for students to learn and get help from teachers"
+                keyWord="Programming, MERN, Database"
+            />
+            <Header
+                open={open}
+                setOpen={setOpen}
+                activeItem={activeItem}
+                setRoute={setRoute}
+                Route={route}
+            />
+            <About />
+            <Footer />
+        </div>
     )
 }
 
-export default page
+export default Page

@@ -75,6 +75,7 @@ const Profile: FC<Props> = ({ user }) => {
                     <div className="grid grid-cols-1 gap-[20px] md:grid-cols-2 md:gap-[25px] lg:grid-cols-3 lg:gap-[25px] 1500px:grid-cols-4 1500px:gap-[35px] mb-12 border-0">
                         {course &&
                             course.map((item: any, index: number) => (
+                                // @ts-ignore: CourseCard props typing doesn't include 'user' yet
                                 <CourseCard item={item} key={index} user={user} isProfile={true} />
                             ))}
                     </div>

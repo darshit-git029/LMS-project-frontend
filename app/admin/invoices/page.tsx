@@ -21,7 +21,7 @@ const page = (props: Props) => {
           <Adminsidebar />
         </div>
         <div className="w-[85%] ">
-          <DashboardHeader notifications={[]} />
+          <DashboardHeader />
           <AllInvoices />
         </div>
       </div>

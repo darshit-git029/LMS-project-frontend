@@ -20,33 +20,33 @@ function DashboardHeader({ open, setOpen }: Props) {
 
     const { data, refetch } = useGetAllNotificationQuery(undefined, { refetchOnMountOrArgChange: true })
     const [updateNotificationstatus, { isSuccess }] = useUpdateNotificationstatusMutation()
-    const [notification, setNotification] = useState<any>([])
+    // const [notification, setNotification] = useState<any>([])
 
-    const [audio] = useState(
-        new Audio(
-            "https://res.cloudinary.com/demo/video/upload/du_3.0,so_2.0/ac_mp3,br_44k/docs/firefly-tune.mp3"
-        )
-    )
-    const playerNotification = () => {
-        audio.play()
-    }
+    // const [audio] = useState(
+    //     new Audio(
+    //         "https://res.cloudinary.com/demo/video/upload/du_3.0,so_2.0/ac_mp3,br_44k/docs/firefly-tune.mp3"
+    //     )
+    // )
+    // const playerNotification = () => {
+    //     audio.play()
+    // }
 
     useEffect(() => {
-        if (data) {
-            setNotification(
-                data.notification.filter((item: any) => item.status === "unread")
-            )
-        }
+        // if (data) {
+        //     setNotification(
+        //         data.notification.filter((item: any) => item.status === "unread")
+        //     )
+        // }
         if (isSuccess) {
             refetch()
         }
-        audio.load()
+        // audio.load()
     }, [data, isSuccess])
 
     useEffect(() => {
         socketId.on("newNotification", (data) => {
             refetch()
-            playerNotification()
+            // playerNotification()
         })
     }, [refetch])
 
@@ -59,16 +59,16 @@ function DashboardHeader({ open, setOpen }: Props) {
             <ThemeSwitcher />
             <div className="relative cursor-pointer m-2" onClick={() => setOpen(!open)}>
                 <IoMdNotificationsOutline className="text-2xl cursor-pointer text-black dark:text-white" />
-                <span className="absolute -top-2 right-2 rounded-full bg-[#37a39a] w-[18px] h-[18px] text-[12px] flex items-center justify-center text-white">
+                {/* <span className="absolute -top-2 right-2 rounded-full bg-[#37a39a] w-[18px] h-[18px] text-[12px] flex items-center justify-center text-white">
                     {notification && notification.length}
-                </span>
+                </span> */}
             </div>
             {open && (
                 <div className="w-[350px] h-[60vh] overflow-y-scroll py-3 px-2 border border-[#ffffff0c] dark:bg-[#111C43] bg-white shadow-xl absolute top-16 z-[9999999999999999999999999999999999] rounded">
                     <h5 className="text-center text-[20px] font-Poppins text-black dark:text-white p-3">
                         Notifications
                     </h5>
-                    {notification ? (
+                    {/* {notification ? (
                         notification.map((item: Notification, index: number) => (
                             <div
                                 className="dark:bg-[#2d3a4e] bg-[#00000013] font-Poppins border-b dark:border-b-[#ffffff47] border-b-[#0000000f]"
@@ -93,7 +93,7 @@ function DashboardHeader({ open, setOpen }: Props) {
                         ))
                     ) : (
                         <p className="text-center text-black dark:text-white">No notifications</p>
-                    )}
+                    )} */}
                 </div>
             )}
         </div>

@@ -1,48 +1,51 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-"use client"
-import { useGetAlluserCourseQuery } from '@/redux/features/courses/courseApi'
-import { useGetHeroDataQuery } from '@/redux/Layout/layoutApi'
-import { useSearchParams } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
-import Footer from '../Footer/Footer'
-import CaourseCard from '../components/Courses/CaourseCard'
-import Header from '../components/Header'
-import Loader from '../components/Loaders/Loader'
-import Heading from '../utils/Heading'
-import { style } from '@/app/style'
+/* eslint-disable @typescript-eslint/no-explicit-any */
+"use client";
+import { useGetAlluserCourseQuery } from "@/redux/features/courses/courseApi";
+import { useGetHeroDataQuery } from "@/redux/Layout/layoutApi";
+import React, { useEffect, useState } from "react";
+import Footer from "../Footer/Footer";
+import CaourseCard from "../components/Courses/CaourseCard";
+import Header from "../components/Header";
+import Loader from "../components/Loaders/Loader";
+import Heading from "../utils/Heading";
+import { style } from "@/app/style";
 
-type Props = {}
+type Props = {
+  searchParams: { title?: string };
+};
 
-const page = (props: Props) => {
-
+const Page = ({ searchParams }: Props) => {
   enum LAYOUT {
-    CATEGORIES = "Categories"
+    CATEGORIES = "Categories",
   }
 
-  const searchParams = useSearchParams()
-  const search = searchParams?.get("title")
-  const { data, isLoading } = useGetAlluserCourseQuery(undefined, {})
-  const { data: categoiresData } = useGetHeroDataQuery(LAYOUT.CATEGORIES, {})
-  const [Route, setRoute] = useState("Login")
-  const [open, setOpen] = useState(false)
-  const [course, setCourses] = useState([])
-  const [category, setCategory] = useState("All")
-  console.log(categoiresData);
-  console.log(data);
+  const search = searchParams?.title || "";
+  const { data, isLoading } = useGetAlluserCourseQuery(undefined, {});
+  const { data: categoiresData } = useGetHeroDataQuery(LAYOUT.CATEGORIES, {});
+  const [Route, setRoute] = useState("Login");
+  const [open, setOpen] = useState(false);
+  const [course, setCourses] = useState<any[]>([]);
+  const [category, setCategory] = useState("All");
 
   useEffect(() => {
-    if (category === "All") {
-      setCourses(data?.course)
-    } if (category !== "All") {
-      setCourses(data?.course.filter((item: any) => item.category === category))
-    }
+    if (!data?.course) return;
+
     if (search) {
-      setCourses(data?.course.filter((item: any) => item.name.toLowerCase().includes(search.toLowerCase())))
+      setCourses(
+        data.course.filter((item: any) =>
+          item.name.toLowerCase().includes(search.toLowerCase())
+        )
+      );
+    } else if (category === "All") {
+      setCourses(data.course);
+    } else {
+      setCourses(
+        data.course.filter((item: any) => item.category === category)
+      );
     }
-  }, [data, search, category])
-  console.log(search)
+  }, [data, search, category]);
+
   const categories = categoiresData?.getLayout[0]?.category;
-  console.log(categories);
 
   return (
     <div>
@@ -89,13 +92,15 @@ const page = (props: Props) => {
                   </div>
                 ))}
             </div>
-            {
-              course && course.length === 0 && (
-                <p className={`${style.label} justify-center min-h-[50vh] flex items-center`}>
-                  {search ? "No courses found!" : "No courses found in this category. Please try another one!"}
-                </p>
-              )
-            }
+            {course && course.length === 0 && (
+              <p
+                className={`${style.label} justify-center min-h-[50vh] flex items-center`}
+              >
+                {search
+                  ? "No courses found!"
+                  : "No courses found in this category. Please try another one!"}
+              </p>
+            )}
             <br />
             <br />
             <div className="grid grid-cols-1 gap-[20px] md:grid-cols-2 md:gap-[25px] lg:grid-cols-3 lg:gap-[25px] 1500px:grid-cols-4 1500px:gap-[35px] mb-12 border-0">
@@ -112,4 +117,4 @@ const page = (props: Props) => {
   );
 };
 
-export default page;
+export default Page;

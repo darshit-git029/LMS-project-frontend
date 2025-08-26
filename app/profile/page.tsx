@@ -7,10 +7,8 @@ import Profile from '../components/Profile/Profile'
 import { useSelector } from 'react-redux'
 import Footer from '../Footer/Footer'
 
-type Props = {}
 
-
-const page: FC<Props> = (Props) => {
+const page = () => {
 
   const [open, setOpen] = useState(false)
   const [activeItem, setActveitem] = useState(5)

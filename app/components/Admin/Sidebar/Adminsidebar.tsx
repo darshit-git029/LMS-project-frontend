@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react/jsx-no-undef */
 "use client";
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState, ReactElement } from "react";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography } from "@mui/material";
 import "react-pro-sidebar/dist/css/styles.css";
@@ -32,7 +32,7 @@ import { useTheme } from "next-themes";
 interface itemProps {
   title: string;
   to: string;
-  icon: JSX.Element;
+  icon: ReactElement;
   selected: string;
   setSelected: any;
 }
